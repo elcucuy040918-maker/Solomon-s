@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SOLOMON'S - 스포츠 토론 & 실시간 투표</title>
+  <title>SOLOMON&#39;S - 스포츠 토론 &amp; 실시간 투표</title>
+  
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
+    window.tailwind = window.tailwind || {};
     tailwind.config = {
       theme: {
         extend: {
@@ -24,8 +26,11 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Fonts: Oswald (스포츠/역동적 폰트) & Noto Sans KR -->
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <!-- Google Fonts: Oswald & Noto Sans KR -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
@@ -87,7 +92,7 @@
             <div class="absolute inset-0 bg-gradient-to-t from-[#0A0D14] via-transparent to-black/30"></div>
             
             <!-- 이미지 변경 버튼 -->
-            <button onclick="event.stopPropagation(); changeHeroImage('A');" class="absolute top-3 right-3 bg-black/60 hover:bg-black/90 text-gray-300 text-xs px-2.5 py-1 rounded-lg border border-gray-700 transition flex items-center gap-1.5 backdrop-blur-sm z-10">
+            <button type="button" onclick="event.stopPropagation(); changeHeroImage('A');" class="absolute top-3 right-3 bg-black/60 hover:bg-black/90 text-gray-300 text-xs px-2.5 py-1 rounded-lg border border-gray-700 transition flex items-center gap-1.5 backdrop-blur-sm z-10">
               <i class="fa-solid fa-camera"></i> 이미지 수정
             </button>
 
@@ -101,7 +106,7 @@
           </div>
           <div class="p-4 bg-gray-950/90 flex items-center justify-between border-t border-gray-800">
             <span class="text-xs text-gray-400"><span id="hero-count-a" class="font-sports-title text-base font-bold text-gray-200">0</span>표</span>
-            <button id="hero-btn-a" onclick="handleHeroVote('A')" class="px-5 py-2 rounded-xl text-xs font-black uppercase tracking-wider bg-blue-600 hover:bg-blue-500 text-white transition shadow-lg shadow-blue-600/30">
+            <button id="hero-btn-a" type="button" onclick="handleHeroVote('A')" class="px-5 py-2 rounded-xl text-xs font-black uppercase tracking-wider bg-blue-600 hover:bg-blue-500 text-white transition shadow-lg shadow-blue-600/30">
               선택 및 투표
             </button>
           </div>
@@ -114,7 +119,7 @@
             <div class="absolute inset-0 bg-gradient-to-t from-[#0A0D14] via-transparent to-black/30"></div>
             
             <!-- 이미지 변경 버튼 -->
-            <button onclick="event.stopPropagation(); changeHeroImage('B');" class="absolute top-3 right-3 bg-black/60 hover:bg-black/90 text-gray-300 text-xs px-2.5 py-1 rounded-lg border border-gray-700 transition flex items-center gap-1.5 backdrop-blur-sm z-10">
+            <button type="button" onclick="event.stopPropagation(); changeHeroImage('B');" class="absolute top-3 right-3 bg-black/60 hover:bg-black/90 text-gray-300 text-xs px-2.5 py-1 rounded-lg border border-gray-700 transition flex items-center gap-1.5 backdrop-blur-sm z-10">
               <i class="fa-solid fa-camera"></i> 이미지 수정
             </button>
 
@@ -128,7 +133,7 @@
           </div>
           <div class="p-4 bg-gray-950/90 flex items-center justify-between border-t border-gray-800">
             <span class="text-xs text-gray-400"><span id="hero-count-b" class="font-sports-title text-base font-bold text-gray-200">0</span>표</span>
-            <button id="hero-btn-b" onclick="handleHeroVote('B')" class="px-5 py-2 rounded-xl text-xs font-black uppercase tracking-wider bg-red-600 hover:bg-red-500 text-white transition shadow-lg shadow-red-600/30">
+            <button id="hero-btn-b" type="button" onclick="handleHeroVote('B')" class="px-5 py-2 rounded-xl text-xs font-black uppercase tracking-wider bg-red-600 hover:bg-red-500 text-white transition shadow-lg shadow-red-600/30">
               선택 및 투표
             </button>
           </div>
@@ -177,7 +182,7 @@
     <section id="all-matches">
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-2xl font-black italic tracking-wide flex items-center gap-2">
-          <i class="fa-solid fa-bolt text-yellow-500"></i> 진행 중인 매치 토론 & 투표
+          <i class="fa-solid fa-bolt text-yellow-500"></i> 진행 중인 매치 토론 &amp; 투표
         </h2>
         <span class="text-xs text-gray-400">카드를 클릭해 투표 및 댓글을 남겨보세요</span>
       </div>
@@ -325,7 +330,7 @@
               </div>
               <p class="text-xs text-gray-200">${escapeHtml(c.text)}</p>
             </div>
-            <button onclick="deleteHeroComment(${c.id})" class="text-gray-500 hover:text-red-400 text-xs transition px-1">
+            <button type="button" onclick="deleteHeroComment(${c.id})" class="text-gray-500 hover:text-red-400 text-xs transition px-1">
               <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
@@ -337,7 +342,6 @@
     function escapeHtml(str) {
       return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     }
-
 
     // ==========================================
     // 2. 서브 토론 매치 데이터 및 로직
@@ -463,7 +467,7 @@
           : m.comments.map(c => `
               <div class="flex justify-between items-center text-xs bg-gray-900/80 border border-gray-800/80 px-2.5 py-1.5 rounded-lg">
                 <span class="text-gray-300">${escapeHtml(c.text)}</span>
-                <button onclick="deleteSubComment(${m.id}, ${c.id})" class="text-gray-500 hover:text-red-400 text-[10px] ml-2">
+                <button type="button" onclick="deleteSubComment(${m.id}, ${c.id})" class="text-gray-500 hover:text-red-400 text-[10px] ml-2">
                   <i class="fa-solid fa-xmark"></i>
                 </button>
               </div>
@@ -485,7 +489,7 @@
                   <img src="${m.optionA.img}" class="h-full w-full object-cover group-hover:scale-105 transition duration-300">
                   <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/30"></div>
                   
-                  <button onclick="event.stopPropagation(); changeSubImage(${m.id}, 'A');" class="absolute top-2 right-2 bg-black/60 hover:bg-black/90 text-gray-300 text-[10px] px-1.5 py-0.5 rounded border border-gray-700 transition">
+                  <button type="button" onclick="event.stopPropagation(); changeSubImage(${m.id}, 'A');" class="absolute top-2 right-2 bg-black/60 hover:bg-black/90 text-gray-300 text-[10px] px-1.5 py-0.5 rounded border border-gray-700 transition">
                     <i class="fa-solid fa-camera"></i>
                   </button>
 
@@ -505,7 +509,7 @@
                   <img src="${m.optionB.img}" class="h-full w-full object-cover group-hover:scale-105 transition duration-300">
                   <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/30"></div>
 
-                  <button onclick="event.stopPropagation(); changeSubImage(${m.id}, 'B');" class="absolute top-2 right-2 bg-black/60 hover:bg-black/90 text-gray-300 text-[10px] px-1.5 py-0.5 rounded border border-gray-700 transition">
+                  <button type="button" onclick="event.stopPropagation(); changeSubImage(${m.id}, 'B');" class="absolute top-2 right-2 bg-black/60 hover:bg-black/90 text-gray-300 text-[10px] px-1.5 py-0.5 rounded border border-gray-700 transition">
                     <i class="fa-solid fa-camera"></i>
                   </button>
 
@@ -549,10 +553,12 @@
       });
     }
 
-    // 초기 실행
-    updateHeroUI();
-    renderHeroComments();
-    renderMatches();
+    // 문서 로드 완료 시 안전하게 초기화 실행
+    document.addEventListener('DOMContentLoaded', () => {
+      updateHeroUI();
+      renderHeroComments();
+      renderMatches();
+    });
   </script>
 </body>
 </html>
