@@ -25,7 +25,6 @@
     }
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Fonts: Oswald (스포츠/역동적 폰트) & Noto Sans KR -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
@@ -74,22 +73,20 @@
 
       <!-- 양자 대결 카드 그리드 -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
-        
-        <!-- VS 뱃지 (가운데 배치) -->
         <div class="hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-14 h-14 rounded-full bg-[#0A0D14] border-2 border-yellow-500/80 items-center justify-center font-sports-title font-black italic text-xl text-yellow-400 shadow-2xl shadow-yellow-500/20">
           VS
         </div>
 
         <!-- 옵션 A: 손흥민 -->
         <div id="hero-card-a" class="group relative rounded-2xl overflow-hidden border-2 border-gray-800/80 hover:border-blue-500/80 transition-all duration-300 bg-gray-900 flex flex-col justify-between">
-          <div class="h-80 w-full overflow-hidden relative cursor-pointer" onclick="handleHeroVote('A')">
+          <div class="h-80 w-full overflow-hidden relative cursor-pointer" onclick="handleHeroVote('a')">
             <img id="hero-img-a" src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=900&q=80" alt="손흥민" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500">
             <div class="absolute inset-0 bg-gradient-to-t from-[#0A0D14] via-transparent to-black/30"></div>
             
-            <!-- 이미지 변경 버튼 -->
-            <button onclick="event.stopPropagation(); changeHeroImage('A');" class="absolute top-3 right-3 bg-black/60 hover:bg-black/90 text-gray-300 text-xs px-2.5 py-1 rounded-lg border border-gray-700 transition flex items-center gap-1.5 backdrop-blur-sm z-10">
+            <label onclick="event.stopPropagation();" class="absolute top-3 right-3 bg-black/60 hover:bg-black/90 text-gray-300 text-xs px-2.5 py-1 rounded-lg border border-gray-700 transition flex items-center gap-1.5 backdrop-blur-sm z-10 cursor-pointer">
               <i class="fa-solid fa-camera"></i> 이미지 수정
-            </button>
+              <input type="file" accept="image/*" class="hidden" onchange="uploadImage(event, 'hero-img-a')">
+            </label>
 
             <div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
               <div>
@@ -101,7 +98,7 @@
           </div>
           <div class="p-4 bg-gray-950/90 flex items-center justify-between border-t border-gray-800">
             <span class="text-xs text-gray-400"><span id="hero-count-a" class="font-sports-title text-base font-bold text-gray-200">0</span>표</span>
-            <button id="hero-btn-a" onclick="handleHeroVote('A')" class="px-5 py-2 rounded-xl text-xs font-black uppercase tracking-wider bg-blue-600 hover:bg-blue-500 text-white transition shadow-lg shadow-blue-600/30">
+            <button id="hero-btn-a" onclick="handleHeroVote('a')" class="px-5 py-2 rounded-xl text-xs font-black uppercase tracking-wider bg-blue-600 hover:bg-blue-500 text-white transition shadow-lg shadow-blue-600/30">
               선택 및 투표
             </button>
           </div>
@@ -109,14 +106,14 @@
 
         <!-- 옵션 B: 모하메드 살라 -->
         <div id="hero-card-b" class="group relative rounded-2xl overflow-hidden border-2 border-gray-800/80 hover:border-red-500/80 transition-all duration-300 bg-gray-900 flex flex-col justify-between">
-          <div class="h-80 w-full overflow-hidden relative cursor-pointer" onclick="handleHeroVote('B')">
+          <div class="h-80 w-full overflow-hidden relative cursor-pointer" onclick="handleHeroVote('b')">
             <img id="hero-img-b" src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=900&q=80" alt="모하메드 살라" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500">
             <div class="absolute inset-0 bg-gradient-to-t from-[#0A0D14] via-transparent to-black/30"></div>
             
-            <!-- 이미지 변경 버튼 -->
-            <button onclick="event.stopPropagation(); changeHeroImage('B');" class="absolute top-3 right-3 bg-black/60 hover:bg-black/90 text-gray-300 text-xs px-2.5 py-1 rounded-lg border border-gray-700 transition flex items-center gap-1.5 backdrop-blur-sm z-10">
+            <label onclick="event.stopPropagation();" class="absolute top-3 right-3 bg-black/60 hover:bg-black/90 text-gray-300 text-xs px-2.5 py-1 rounded-lg border border-gray-700 transition flex items-center gap-1.5 backdrop-blur-sm z-10 cursor-pointer">
               <i class="fa-solid fa-camera"></i> 이미지 수정
-            </button>
+              <input type="file" accept="image/*" class="hidden" onchange="uploadImage(event, 'hero-img-b')">
+            </label>
 
             <div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
               <div>
@@ -128,14 +125,14 @@
           </div>
           <div class="p-4 bg-gray-950/90 flex items-center justify-between border-t border-gray-800">
             <span class="text-xs text-gray-400"><span id="hero-count-b" class="font-sports-title text-base font-bold text-gray-200">0</span>표</span>
-            <button id="hero-btn-b" onclick="handleHeroVote('B')" class="px-5 py-2 rounded-xl text-xs font-black uppercase tracking-wider bg-red-600 hover:bg-red-500 text-white transition shadow-lg shadow-red-600/30">
+            <button id="hero-btn-b" onclick="handleHeroVote('b')" class="px-5 py-2 rounded-xl text-xs font-black uppercase tracking-wider bg-red-600 hover:bg-red-500 text-white transition shadow-lg shadow-red-600/30">
               선택 및 투표
             </button>
           </div>
         </div>
       </div>
 
-      <!-- 실시간 몇 대 몇 프로그레스 게이지 -->
+      <!-- 프로그레스 게이지 -->
       <div class="mt-6">
         <div class="flex justify-between text-xs font-bold text-gray-400 mb-2 uppercase tracking-wider">
           <span class="text-blue-400">손흥민 지지율</span>
@@ -153,8 +150,8 @@
           <i class="fa-solid fa-comments text-blue-500"></i> 메인 토론 실시간 의견 (<span id="hero-comment-count" class="text-blue-400">0</span>)
         </h3>
         
-        <!-- 댓글 입력 Form -->
         <form onsubmit="addHeroComment(event)" class="flex flex-col sm:flex-row gap-2 mb-6">
+          <input type="text" id="hero-comment-author" placeholder="닉네임" required class="bg-gray-900 border border-gray-700 text-white text-xs rounded-xl px-3 py-2.5 sm:w-28 focus:outline-none focus:border-blue-500">
           <select id="hero-comment-side" class="bg-gray-900 border border-gray-700 text-gray-200 text-xs rounded-xl px-3 py-2.5 focus:outline-none focus:border-blue-500">
             <option value="SON">손흥민 지지</option>
             <option value="SALAH">살라 지지</option>
@@ -166,10 +163,7 @@
           </button>
         </form>
 
-        <!-- 댓글 목록 -->
-        <div id="hero-comments-list" class="space-y-2.5 max-h-60 overflow-y-auto pr-2">
-          <!-- JS로 동적 추가 -->
-        </div>
+        <div id="hero-comments-list" class="space-y-2.5 max-h-60 overflow-y-auto pr-2"></div>
       </div>
     </section>
 
@@ -182,481 +176,152 @@
         <span class="text-xs text-gray-400">카드를 클릭해 투표 및 댓글을 남겨보세요</span>
       </div>
 
-      <div id="match-cards-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- 자바스크립트로 동적 렌더링 -->
-      </div>
+      <div id="match-cards-container" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
     </section>
   </main>
 
   <script>
-    // ==========================================
-    // 1. 메인 히어로 매치 상태 및 로직
-    // ==========================================
-    let heroData = {
-      voted: null,
-      votesA: 0,
-      votesB: 0,
-      comments: []
-    };
+    const PAGE_ID = 'main';
 
-    function handleHeroVote(choice) {
-      if (heroData.voted === choice) return;
-      
-      if (!heroData.voted) {
-        if (choice === 'A') heroData.votesA++;
-        else heroData.votesB++;
-      } else {
-        if (choice === 'A') {
-          heroData.votesA++;
-          heroData.votesB = Math.max(0, heroData.votesB - 1);
-        } else {
-          heroData.votesB++;
-          heroData.votesA = Math.max(0, heroData.votesA - 1);
-        }
-      }
-      heroData.voted = choice;
-      updateHeroUI();
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     }
 
-    function updateHeroUI() {
-      const total = heroData.votesA + heroData.votesB;
-      const pctA = total === 0 ? 0 : Math.round((heroData.votesA / total) * 100);
+    // 1. D1 데이터베이스 연동: 투표 로딩 및 투표 실행
+    async function loadPoll() {
+      try {
+        const res = await fetch(`/api/poll?id=${PAGE_ID}`);
+        const poll = await res.json();
+        updateHeroUI(poll.option_a || 0, poll.option_b || 0);
+      } catch (err) {
+        console.error('투표 데이터 로드 실패:', err);
+      }
+    }
+
+    async function handleHeroVote(option) {
+      try {
+        await fetch('/api/poll', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: PAGE_ID, option })
+        });
+        loadPoll();
+      } catch (err) {
+        alert('투표 등록 실패');
+      }
+    }
+
+    function updateHeroUI(votesA, votesB) {
+      const total = votesA + votesB;
+      const pctA = total === 0 ? 0 : Math.round((votesA / total) * 100);
       const pctB = total === 0 ? 0 : 100 - pctA;
-      
-      const barWidthA = total === 0 ? 50 : pctA;
-      const barWidthB = total === 0 ? 50 : pctB;
 
       document.getElementById('hero-total-votes').innerText = total.toLocaleString();
-      document.getElementById('hero-count-a').innerText = heroData.votesA.toLocaleString();
-      document.getElementById('hero-count-b').innerText = heroData.votesB.toLocaleString();
+      document.getElementById('hero-count-a').innerText = votesA.toLocaleString();
+      document.getElementById('hero-count-b').innerText = votesB.toLocaleString();
       document.getElementById('hero-pct-a').innerText = `${pctA}%`;
       document.getElementById('hero-pct-b').innerText = `${pctB}%`;
 
-      document.getElementById('hero-bar-a').style.width = `${barWidthA}%`;
-      document.getElementById('hero-bar-b').style.width = `${barWidthB}%`;
+      document.getElementById('hero-bar-a').style.width = `${total === 0 ? 50 : pctA}%`;
+      document.getElementById('hero-bar-b').style.width = `${total === 0 ? 50 : pctB}%`;
+    }
 
-      const cardA = document.getElementById('hero-card-a');
-      const cardB = document.getElementById('hero-card-b');
-      const btnA = document.getElementById('hero-btn-a');
-      const btnB = document.getElementById('hero-btn-b');
-
-      if (heroData.voted === 'A') {
-        cardA.classList.add('border-blue-500');
-        cardB.classList.remove('border-red-500');
-        btnA.innerText = '✓ 투표 완료';
-        btnB.innerText = '선택 및 투표';
-      } else if (heroData.voted === 'B') {
-        cardB.classList.add('border-red-500');
-        cardA.classList.remove('border-blue-500');
-        btnB.innerText = '✓ 투표 완료';
-        btnA.innerText = '선택 및 투표';
+    // 2. D1 데이터베이스 연동: 댓글 로딩 및 등록
+    async function loadHeroComments() {
+      try {
+        const res = await fetch(`/api/comments?page_id=${PAGE_ID}`);
+        const comments = await res.json();
+        renderHeroComments(comments);
+      } catch (err) {
+        console.error('댓글 로드 실패:', err);
       }
     }
 
-    // 메인 매치 이미지 변경 기능
-    function changeHeroImage(choice) {
-      const currentImg = choice === 'A' 
-        ? document.getElementById('hero-img-a').src 
-        : document.getElementById('hero-img-b').src;
-      
-      const newUrl = prompt("변경할 이미지의 URL을 입력하세요:", currentImg);
-      if (newUrl && newUrl.trim() !== "") {
-        if (choice === 'A') {
-          document.getElementById('hero-img-a').src = newUrl.trim();
-        } else {
-          document.getElementById('hero-img-b').src = newUrl.trim();
-        }
-      }
-    }
-
-    // 메인 매치 댓글 기능
-    function addHeroComment(e) {
+    async function addHeroComment(e) {
       e.preventDefault();
-      const input = document.getElementById('hero-comment-input');
+      const author = document.getElementById('hero-comment-author').value.trim();
       const side = document.getElementById('hero-comment-side').value;
-      const text = input.value.trim();
+      const text = document.getElementById('hero-comment-input').value.trim();
 
-      if (!text) return;
+      if (!author || !text) return alert('닉네임과 의견을 입력해주세요.');
 
-      const newComment = {
-        id: Date.now(),
-        side: side,
-        text: text,
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      };
+      const contentPayload = `[${side}] ${text}`;
 
-      heroData.comments.unshift(newComment);
-      input.value = '';
-      renderHeroComments();
+      await fetch('/api/comments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ page_id: PAGE_ID, author: author, content: contentPayload })
+      });
+
+      document.getElementById('hero-comment-input').value = '';
+      loadHeroComments();
     }
 
-    function deleteHeroComment(id) {
-      heroData.comments = heroData.comments.filter(c => c.id !== id);
-      renderHeroComments();
-    }
-
-    function renderHeroComments() {
+    function renderHeroComments(comments) {
       const container = document.getElementById('hero-comments-list');
-      document.getElementById('hero-comment-count').innerText = heroData.comments.length;
+      document.getElementById('hero-comment-count').innerText = comments.length;
 
-      if (heroData.comments.length === 0) {
+      if (!comments || comments.length === 0) {
         container.innerHTML = `<p class="text-xs text-gray-500 italic py-2">아직 댓글이 없습니다. 첫 의견을 작성해보세요!</p>`;
         return;
       }
 
-      container.innerHTML = heroData.comments.map(c => {
-        let badgeClass = 'bg-gray-800 text-gray-300 border-gray-700';
+      container.innerHTML = comments.map(c => {
         let sideText = '중립';
+        let badgeClass = 'bg-gray-800 text-gray-300 border-gray-700';
+        let displayContent = c.content;
 
-        if (c.side === 'SON') {
-          badgeClass = 'bg-blue-950/80 text-blue-400 border-blue-800';
+        if (c.content.startsWith('[SON]')) {
           sideText = '손흥민 지지';
-        } else if (c.side === 'SALAH') {
-          badgeClass = 'bg-red-950/80 text-red-400 border-red-800';
+          badgeClass = 'bg-blue-950/80 text-blue-400 border-blue-800';
+          displayContent = c.content.replace('[SON] ', '');
+        } else if (c.content.startsWith('[SALAH]')) {
           sideText = '살라 지지';
+          badgeClass = 'bg-red-950/80 text-red-400 border-red-800';
+          displayContent = c.content.replace('[SALAH] ', '');
+        } else if (c.content.startsWith('[NEUTRAL]')) {
+          displayContent = c.content.replace('[NEUTRAL] ', '');
         }
 
         return `
           <div class="bg-gray-900/80 border border-gray-800 rounded-xl p-3 flex justify-between items-start gap-3">
             <div class="space-y-1">
               <div class="flex items-center gap-2">
+                <span class="text-xs font-bold text-blue-400">${escapeHtml(c.author)}</span>
                 <span class="text-[10px] font-bold px-2 py-0.5 rounded border ${badgeClass}">${sideText}</span>
-                <span class="text-[11px] text-gray-500">${c.time}</span>
+                <span class="text-[11px] text-gray-500">${c.created_at || ''}</span>
               </div>
-              <p class="text-xs text-gray-200">${escapeHtml(c.text)}</p>
+              <p class="text-xs text-gray-200">${escapeHtml(displayContent)}</p>
             </div>
-            <button onclick="deleteHeroComment(${c.id})" class="text-gray-500 hover:text-red-400 text-xs transition px-1">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
           </div>
         `;
       }).join('');
     }
 
-    // XSS 방지용 이스케이프 함수
-    function escapeHtml(str) {
-      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-    }
+    // 3. R2 연동: 이미지 직접 파일 선택 업로드
+    async function uploadImage(event, targetImgId) {
+      const file = event.target.files[0];
+      if (!file) return;
 
+      const formData = new FormData();
+      formData.append('file', file);
 
-    // ==========================================
-    // 2. 서브 토론 매치 데이터 및 로직
-    // ==========================================
-    const matches = [
-      {
-        id: 1,
-        title: "축구 역대 최고의 선수 (GOAT) 논쟁",
-        category: "FOOTBALL",
-        optionA: { name: "리오넬 메시", team: "아르헨티나", img: "https://images.unsplash.com/photo-1518091043644-c1d4457512c6?auto=format&fit=crop&w=700&q=80", votes: 0 },
-        optionB: { name: "크리스티아누 호날두", team: "포르투갈", img: "https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=700&q=80", votes: 0 },
-        voted: null,
-        comments: []
-      },
-      {
-        id: 2,
-        title: "차세대 축구 황제 1위는 누구인가?",
-        category: "NEXT-GEN",
-        optionA: { name: "엘링 홀란드", team: "맨체스터 시티", img: "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?auto=format&fit=crop&w=700&q=80", votes: 0 },
-        optionB: { name: "킬리안 음바페", team: "레알 마드리드", img: "https://images.unsplash.com/photo-1543351611-58f69d7c1781?auto=format&fit=crop&w=700&q=80", votes: 0 },
-        voted: null,
-        comments: []
-      },
-      {
-        id: 3,
-        title: "NBA 올타임 농구 황제 결정전",
-        category: "BASKETBALL",
-        optionA: { name: "마이클 조던", team: "시카고 불스", img: "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=700&q=80", votes: 0 },
-        optionB: { name: "르브론 제임스", team: "LA 레이커스", img: "https://images.unsplash.com/photo-1519861531473-9200262188bf?auto=format&fit=crop&w=700&q=80", votes: 0 },
-        voted: null,
-        comments: []
-      },
-      {
-        id: 4,
-        title: "2026/27 챔피언스리그 우승 0순위 클럽",
-        category: "UCL PREDICTION",
-        optionA: { name: "레알 마드리드", team: "라리가", img: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=700&q=80", votes: 0 },
-        optionB: { name: "맨체스터 시티", team: "프리미어리그", img: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=700&q=80", votes: 0 },
-        voted: null,
-        comments: []
-      }
-    ];
-
-    function voteMatch(matchId, choice) {
-      const match = matches.find(m => m.id === matchId);
-      if (!match || match.voted === choice) return;
-
-      if (!match.voted) {
-        if (choice === 'A') match.optionA.votes++;
-        else match.optionB.votes++;
-      } else {
-        if (choice === 'A') {
-          match.optionA.votes++;
-          match.optionB.votes = Math.max(0, match.optionB.votes - 1);
-        } else {
-          match.optionB.votes++;
-          match.optionA.votes = Math.max(0, match.optionA.votes - 1);
+      try {
+        const res = await fetch('/api/upload', { method: 'POST', body: formData });
+        const data = await res.json();
+        if (data.url) {
+          document.getElementById(targetImgId).src = data.url;
+          alert('이미지가 R2 서버로 업로드 및 변경되었습니다!');
         }
+      } catch (err) {
+        alert('이미지 업로드에 실패했습니다.');
       }
-      match.voted = choice;
-      renderMatches();
-    }
-
-    // 서브 카드 이미지 변경 함수
-    function changeSubImage(matchId, choice) {
-      const match = matches.find(m => m.id === matchId);
-      if (!match) return;
-
-      const currentImg = choice === 'A' ? match.optionA.img : match.optionB.img;
-      const newUrl = prompt("변경할 이미지의 URL을 입력하세요:", currentImg);
-
-      if (newUrl && newUrl.trim() !== "") {
-        if (choice === 'A') match.optionA.img = newUrl.trim();
-        else match.optionB.img = newUrl.trim();
-        renderMatches();
-      }
-    }
-
-    // 서브 카드 댓글 추가 함수
-    function addSubComment(e, matchId) {
-      e.preventDefault();
-      const match = matches.find(m => m.id === matchId);
-      if (!match) return;
-
-      const input = document.getElementById(`sub-input-${matchId}`);
-      const text = input.value.trim();
-      if (!text) return;
-
-      match.comments.unshift({
-        id: Date.now(),
-        text: text,
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      });
-
-      input.value = '';
-      renderMatches();
-    }
-
-    // 서브 카드 댓글 삭제 함수
-    function deleteSubComment(matchId, commentId) {
-      const match = matches.find(m => m.id === matchId);
-      if (!match) return;
-      match.comments = match.comments.filter(c => c.id !== commentId);
-      renderMatches();
-    }
-
-    function renderMatches() {
-      const container = document.getElementById('match-cards-container');
-      container.innerHTML = '';
-
-      matches.forEach(m => {
-        const total = m.optionA.votes + m.optionB.votes;
-        const pctA = total === 0 ? 0 : Math.round((m.optionA.votes / total) * 100);
-        const pctB = total === 0 ? 0 : 100 - pctA;
-        const barWidthA = total === 0 ? 50 : pctA;
-        const barWidthB = total === 0 ? 50 : pctB;
-
-        const card = document.createElement('div');
-        card.className = "bg-[#121722] border border-gray-800/80 rounded-2xl p-5 hover:border-gray-700 transition flex flex-col justify-between shadow-xl";
-
-        const commentsHtml = m.comments.length === 0 
-          ? `<p class="text-[11px] text-gray-500 italic py-1">작성된 댓글이 없습니다.</p>`
-          : m.comments.map(c => `
-              <div class="flex justify-between items-center text-xs bg-gray-900/80 border border-gray-800/80 px-2.5 py-1.5 rounded-lg">
-                <span class="text-gray-300">${escapeHtml(c.text)}</span>
-                <button onclick="deleteSubComment(${m.id}, ${c.id})" class="text-gray-500 hover:text-red-400 text-[10px] ml-2">
-                  <i class="fa-solid fa-xmark"></i>
-                </button>
-              </div>
-            `).join('');
-
-        card.innerHTML = `
-          <div>
-            <div class="flex justify-between items-center mb-3">
-              <span class="text-[10px] font-black uppercase tracking-wider text-blue-400 bg-blue-950/80 px-2.5 py-0.5 rounded border border-blue-900">${m.category}</span>
-              <span class="text-xs text-gray-400">총 <span class="font-sports-title text-sm font-bold text-white">${total.toLocaleString()}</span>표</span>
-            </div>
-            <h3 class="font-bold text-lg text-white mb-4 italic tracking-wide">${m.title}</h3>
-
-            <!-- 양자 대결 선택지 -->
-            <div class="grid grid-cols-2 gap-3 mb-4">
-              <!-- 선택지 A -->
-              <div class="relative rounded-xl overflow-hidden border ${m.voted === 'A' ? 'border-blue-500 ring-2 ring-blue-500/30' : 'border-gray-800 hover:border-gray-600'} bg-gray-900 group transition">
-                <div class="h-36 w-full relative cursor-pointer" onclick="voteMatch(${m.id}, 'A')">
-                  <img src="${m.optionA.img}" class="h-full w-full object-cover group-hover:scale-105 transition duration-300">
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/30"></div>
-                  
-                  <button onclick="event.stopPropagation(); changeSubImage(${m.id}, 'A');" class="absolute top-2 right-2 bg-black/60 hover:bg-black/90 text-gray-300 text-[10px] px-1.5 py-0.5 rounded border border-gray-700 transition">
-                    <i class="fa-solid fa-camera"></i>
-                  </button>
-
-                  <div class="absolute bottom-2 left-2 right-2 flex justify-between items-end">
-                    <div>
-                      <div class="text-[10px] text-gray-400">${m.optionA.team}</div>
-                      <div class="text-xs font-bold text-white italic">${m.optionA.name}</div>
-                    </div>
-                    <div class="font-sports-title text-lg font-black text-blue-400">${pctA}%</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 선택지 B -->
-              <div class="relative rounded-xl overflow-hidden border ${m.voted === 'B' ? 'border-red-500 ring-2 ring-red-500/30' : 'border-gray-800 hover:border-gray-600'} bg-gray-900 group transition">
-                <div class="h-36 w-full relative cursor-pointer" onclick="voteMatch(${m.id}, 'B')">
-                  <img src="${m.optionB.img}" class="h-full w-full object-cover group-hover:scale-105 transition duration-300">
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/30"></div>
-
-                  <button onclick="event.stopPropagation(); changeSubImage(${m.id}, 'B');" class="absolute top-2 right-2 bg-black/60 hover:bg-black/90 text-gray-300 text-[10px] px-1.5 py-0.5 rounded border border-gray-700 transition">
-                    <i class="fa-solid fa-camera"></i>
-                  </button>
-
-                  <div class="absolute bottom-2 left-2 right-2 flex justify-between items-end">
-                    <div>
-                      <div class="text-[10px] text-gray-400">${m.optionB.team}</div>
-                      <div class="text-xs font-bold text-white italic">${m.optionB.name}</div>
-                    </div>
-                    <div class="font-sports-title text-lg font-black text-red-400">${pctB}%</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- 몇대몇 게이지 -->
-            <div class="mb-4">
-              <div class="flex justify-between text-[11px] font-bold text-gray-400 mb-1">
-                <span>${m.optionA.votes.toLocaleString()}표 (${pctA}%)</span>
-                <span>(${pctB}%) ${m.optionB.votes.toLocaleString()}표</span>
-              </div>
-              <div class="w-full h-2.5 bg-gray-900 rounded-full overflow-hidden flex border border-gray-800">
-                <div style="width: ${barWidthA}%" class="h-full bg-blue-500 vote-bar-transition"></div>
-                <div style="width: ${barWidthB}%" class="h-full bg-red-500 vote-bar-transition"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- 서브 카드 댓글 영역 -->
-          <div class="pt-3 border-t border-gray-800/80">
-            <form onsubmit="addSubComment(event, ${m.id})" class="flex gap-2 mb-2">
-              <input type="text" id="sub-input-${m.id}" placeholder="한줄 의견 남기기..." required class="flex-1 bg-gray-900 border border-gray-800 text-white text-[11px] rounded-lg px-3 py-1.5 focus:outline-none focus:border-blue-500">
-              <button type="submit" class="bg-gray-800 hover:bg-gray-700 text-gray-200 text-xs font-bold px-3 py-1.5 rounded-lg transition">등록</button>
-            </form>
-            <div class="space-y-1.5 max-h-32 overflow-y-auto">
-              ${commentsHtml}
-            </div>
-          </div>
-        `;
-
-        container.appendChild(card);
-      });
     }
 
     // 초기 실행
-    updateHeroUI();
-    renderHeroComments();
-    renderMatches();
-  </script>
-<!-- 백엔드 기능 연동 영역 -->
-<div class="max-w-2xl mx-auto p-4 space-y-8">
-  <!-- 1. 댓글 영역 -->
-  <section class="bg-[#121722] p-6 rounded-lg">
-    <h3 class="text-xl font-bold mb-4 text-white">댓글</h3>
-    <div id="comments-list" class="space-y-3 mb-4"></div>
-    <div class="flex flex-col gap-2">
-      <input type="text" id="comment-author" placeholder="닉네임" class="p-2 bg-[#0A0D14] text-white border border-gray-700 rounded" />
-      <textarea id="comment-content" placeholder="댓글을 남겨주세요" class="p-2 bg-[#0A0D14] text-white border border-gray-700 rounded h-20"></textarea>
-      <button onclick="submitComment()" class="bg-[#3B82F6] hover:bg-blue-600 text-white py-2 rounded font-bold">댓글 작성</button>
-    </div>
-  </section>
-
-  <!-- 2. 이미지 업로드 영역 -->
-  <section class="bg-[#121722] p-6 rounded-lg">
-    <h3 class="text-xl font-bold mb-4 text-white">이미지 업로드</h3>
-    <div class="flex gap-2 items-center">
-      <input type="file" id="image-file" accept="image/*" class="text-gray-300" />
-      <button onclick="uploadImage()" class="bg-[#EF4444] hover:bg-red-600 text-white px-4 py-2 rounded font-bold">업로드</button>
-    </div>
-    <div id="upload-result" class="mt-4"></div>
-  </section>
-
-  <!-- 3. 투표 영역 -->
-  <section class="bg-[#121722] p-6 rounded-lg">
-    <h3 class="text-xl font-bold mb-2 text-white">실시간 투표</h3>
-    <p id="poll-status" class="text-gray-400 mb-4">로딩 중...</p>
-    <div class="flex gap-4">
-      <button onclick="vote('a')" class="flex-1 bg-[#3B82F6] py-3 rounded font-bold text-white">A팀 선택</button>
-      <button onclick="vote('b')" class="flex-1 bg-[#EF4444] py-3 rounded font-bold text-white">B팀 선택</button>
-    </div>
-  </section>
-</div>
-
-<!-- 자바스크립트 스크립트 (기능 호출) -->
-<script>
-  const PAGE_ID = 'main';
-
-  // 1. 댓글
-  async function loadComments() {
-    const res = await fetch(`/api/comments?page_id=${PAGE_ID}`);
-    const comments = await res.json();
-    const listDiv = document.getElementById('comments-list');
-    listDiv.innerHTML = comments.map(c => 
-      `<div class="border-b border-gray-800 pb-2">
-        <span class="font-bold text-[#3B82F6]">${c.author}</span>
-        <p class="text-gray-200 mt-1">${c.content}</p>
-        <span class="text-xs text-gray-500">${c.created_at}</span>
-      </div>`
-    ).join('');
-  }
-
-  async function submitComment() {
-    const author = document.getElementById('comment-author').value;
-    const content = document.getElementById('comment-content').value;
-    if (!author || !content) return alert('닉네임과 내용을 입력해주세요.');
-
-    await fetch('/api/comments', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ page_id: PAGE_ID, author, content })
-    });
-
-    document.getElementById('comment-content').value = '';
-    loadComments();
-  }
-
-  // 2. 이미지 업로드
-  async function uploadImage() {
-    const fileInput = document.getElementById('image-file');
-    if (!fileInput.files[0]) return alert('이미지 파일을 선택해주세요.');
-
-    const formData = new FormData();
-    formData.append('file', fileInput.files[0]);
-
-    const res = await fetch('/api/upload', { method: 'POST', body: formData });
-    const data = await res.json();
-    
-    if (data.url) {
-      document.getElementById('upload-result').innerHTML = 
-        `<p class="text-green-400 text-sm mb-2">업로드 성공!</p><img src="${data.url}" class="max-w-full rounded border border-gray-700" />`;
-    }
-  }
-
-  // 3. 투표
-  async function loadPoll() {
-    const res = await fetch(`/api/poll?id=${PAGE_ID}`);
-    const poll = await res.json();
-    document.getElementById('poll-status').innerText = 
-      `A팀: ${poll.option_a}표 | B팀: ${poll.option_b}표`;
-  }
-
-  async function vote(option) {
-    await fetch('/api/poll', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: PAGE_ID, option })
-    });
     loadPoll();
-  }
-
-  loadComments();
-  loadPoll();
-</script>
+    loadHeroComments();
+  </script>
 </body>
 </html>
