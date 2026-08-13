@@ -53,7 +53,7 @@
     </div>
   </header>
 
-  <!-- 메인 토론 영역 (단일 매치) -->
+  <!-- 메인 토론 영역 -->
   <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full space-y-8">
     <div class="flex items-center justify-between mb-4">
       <div>
@@ -64,36 +64,8 @@
       </div>
     </div>
 
-    <!-- 2020년대 최고의 프리미어리그 윙어는? 주제만 남김 -->
-    <div class="space-y-6">
-      <div onclick="location.href='detail.html?id=main'" class="reveal-card active group relative rounded-3xl overflow-hidden border border-red-500/40 bg-[#121722] hover:border-red-500 transition-all duration-300 cursor-pointer shadow-2xl flex flex-col justify-between">
-        <div class="p-6">
-          <div class="flex justify-between items-center mb-3">
-            <span class="text-xs font-black text-red-400 bg-red-950/90 border border-red-800 px-3 py-1 rounded-full">🔥 MAIN MATCH</span>
-            <span class="text-xs text-gray-400"><i class="fa-solid fa-fire text-red-500"></i> 프리미어리그</span>
-          </div>
-          <h2 class="text-xl md:text-2xl font-black italic tracking-wide group-hover:text-blue-400 transition">2020년대 최고의 프리미어리그 윙어는?</h2>
-        </div>
-
-        <div class="grid grid-cols-2 gap-3 p-4 bg-gray-950/50">
-          <div class="h-40 md:h-52 rounded-2xl border border-blue-900/40 bg-gradient-to-br from-blue-950/40 to-gray-900/80 flex flex-col items-center justify-center p-4 text-center">
-            <i class="fa-solid fa-user-ninja text-4xl text-blue-400/60 mb-2"></i>
-            <p class="text-base md:text-lg font-black text-white">손흥민</p>
-            <span class="text-xs text-blue-400/80 mt-1">토트넘 홋스퍼</span>
-          </div>
-          <div class="h-40 md:h-52 rounded-2xl border border-red-900/40 bg-gradient-to-br from-red-950/40 to-gray-900/80 flex flex-col items-center justify-center p-4 text-center">
-            <i class="fa-solid fa-user-ninja text-4xl text-red-400/60 mb-2"></i>
-            <p class="text-base md:text-lg font-black text-white">모하메드 살라</p>
-            <span class="text-xs text-red-400/80 mt-1">리버풀 FC</span>
-          </div>
-        </div>
-
-        <div class="p-5 border-t border-gray-800/80 flex justify-between items-center text-xs md:text-sm text-gray-400 bg-gray-900/60">
-          <span class="font-bold">손흥민 VS 살라</span>
-          <span class="text-blue-400 font-black group-hover:translate-x-1.5 transition">투표 참여하기 →</span>
-        </div>
-      </div>
-    </div>
+    <!-- 메인 토론 카드는 JS로 동적 렌더링 -->
+    <div id="main-match-container" class="space-y-6"></div>
   </main>
 
   <footer class="border-t border-gray-800/60 py-8 text-center text-xs text-gray-500">
@@ -134,7 +106,6 @@
           <input type="text" id="modal-title" placeholder="예: 세계 최고 공격수는? 홀란드 vs 음바페" required class="w-full bg-gray-900 border border-gray-700 text-white rounded-xl p-2.5 focus:outline-none focus:border-blue-500">
         </div>
 
-        <!-- 선택지 A -->
         <div class="p-3 bg-blue-950/30 border border-blue-900/50 rounded-xl space-y-2">
           <span class="font-bold text-blue-400 block">선택지 A</span>
           <div class="grid grid-cols-2 gap-2">
@@ -156,7 +127,6 @@
           </div>
         </div>
 
-        <!-- 선택지 B -->
         <div class="p-3 bg-red-950/30 border border-red-900/50 rounded-xl space-y-2">
           <span class="font-bold text-red-400 block">선택지 B</span>
           <div class="grid grid-cols-2 gap-2">
@@ -191,6 +161,58 @@
 
     let uploadedImgA = '';
     let uploadedImgB = '';
+
+    const defaultMainMatch = {
+      id: 'main',
+      title: '2020년대 최고의 프리미어리그 윙어는?',
+      optionA: { name: '손흥민', team: '토트넘 홋스퍼', img: '', votes: 9 },
+      optionB: { name: '모하메드 살라', team: '리버풀 FC', img: '', votes: 2 }
+    };
+
+    function renderMainMatchCard() {
+      const savedMain = localStorage.getItem('main_match_data');
+      const mainData = savedMain ? JSON.parse(savedMain) : defaultMainMatch;
+
+      const imgA = mainData.optionA.img 
+        ? `<img src="${mainData.optionA.img}" class="w-full h-full object-cover">` 
+        : `<i class="fa-solid fa-user-ninja text-4xl text-blue-400/60 mb-2"></i>`;
+
+      const imgB = mainData.optionB.img 
+        ? `<img src="${mainData.optionB.img}" class="w-full h-full object-cover">` 
+        : `<i class="fa-solid fa-user-ninja text-4xl text-red-400/60 mb-2"></i>`;
+
+      const html = `
+        <div onclick="location.href='detail.html?id=main'" class="reveal-card active group relative rounded-3xl overflow-hidden border border-red-500/40 bg-[#121722] hover:border-red-500 transition-all duration-300 cursor-pointer shadow-2xl flex flex-col justify-between">
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-xs font-black text-red-400 bg-red-950/90 border border-red-800 px-3 py-1 rounded-full">🔥 MAIN MATCH</span>
+              <span class="text-xs text-gray-400"><i class="fa-solid fa-fire text-red-500"></i> 프리미어리그</span>
+            </div>
+            <h2 class="text-xl md:text-2xl font-black italic tracking-wide group-hover:text-blue-400 transition">${escapeHtml(mainData.title)}</h2>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 p-4 bg-gray-950/50">
+            <div class="h-40 md:h-52 rounded-2xl border border-blue-900/40 bg-gradient-to-br from-blue-950/40 to-gray-900/80 flex flex-col items-center justify-center p-4 text-center overflow-hidden">
+              ${imgA}
+              <p class="text-base md:text-lg font-black text-white mt-1">${escapeHtml(mainData.optionA.name)}</p>
+              <span class="text-xs text-blue-400/80">${escapeHtml(mainData.optionA.team)}</span>
+            </div>
+            <div class="h-40 md:h-52 rounded-2xl border border-red-900/40 bg-gradient-to-br from-red-950/40 to-gray-900/80 flex flex-col items-center justify-center p-4 text-center overflow-hidden">
+              ${imgB}
+              <p class="text-base md:text-lg font-black text-white mt-1">${escapeHtml(mainData.optionB.name)}</p>
+              <span class="text-xs text-red-400/80">${escapeHtml(mainData.optionB.team)}</span>
+            </div>
+          </div>
+
+          <div class="p-5 border-t border-gray-800/80 flex justify-between items-center text-xs md:text-sm text-gray-400 bg-gray-900/60">
+            <span class="font-bold">${escapeHtml(mainData.optionA.name)} VS ${escapeHtml(mainData.optionB.name)}</span>
+            <span class="text-blue-400 font-black group-hover:translate-x-1.5 transition">투표 참여하기 →</span>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('main-match-container').innerHTML = html;
+    }
 
     function compressImage(file, callback) {
       const reader = new FileReader();
@@ -328,6 +350,8 @@
 
       container.innerHTML = html;
     }
+
+    document.addEventListener('DOMContentLoaded', renderMainMatchCard);
   </script>
 </body>
 </html>
