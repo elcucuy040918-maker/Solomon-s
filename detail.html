@@ -77,10 +77,10 @@
 
       <!-- 선택지 매치 카드 (양옆에서 중앙으로 이동하는 애니메이션 적용) -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative">
-        <!-- 옵션 A (왼쪽에서 중앙으로 슬라이드) -->
+        <!-- 옵션 A -->
         <div id="card-a" class="animate-slide-left bg-gray-900/90 border rounded-2xl p-5 flex flex-col justify-between space-y-4 transition">
           <div>
-            <div id="img-container-a" class="h-56 rounded-xl bg-gray-950 flex items-center justify-center border border-gray-800 overflow-hidden"></div>
+            <div id="img-container-a" class="h-60 rounded-xl bg-gray-950 flex items-center justify-center border border-gray-800 overflow-hidden relative"></div>
             <input type="file" id="file-a" accept="image/*" class="hidden" onchange="uploadImage(event, 'a')">
             <button onclick="document.getElementById('file-a').click()" class="mt-2 w-full bg-gray-800 hover:bg-gray-700 text-gray-300 text-[11px] font-bold py-1.5 rounded-lg border border-gray-700">
               <i class="fa-solid fa-camera"></i> 사진 업로드
@@ -103,10 +103,10 @@
           </div>
         </div>
 
-        <!-- 옵션 B (오른쪽에서 중앙으로 슬라이드) -->
+        <!-- 옵션 B -->
         <div id="card-b" class="animate-slide-right bg-gray-900/90 border rounded-2xl p-5 flex flex-col justify-between space-y-4 transition">
           <div>
-            <div id="img-container-b" class="h-56 rounded-xl bg-gray-950 flex items-center justify-center border border-gray-800 overflow-hidden"></div>
+            <div id="img-container-b" class="h-60 rounded-xl bg-gray-950 flex items-center justify-center border border-gray-800 overflow-hidden relative"></div>
             <input type="file" id="file-b" accept="image/*" class="hidden" onchange="uploadImage(event, 'b')">
             <button onclick="document.getElementById('file-b').click()" class="mt-2 w-full bg-gray-800 hover:bg-gray-700 text-gray-300 text-[11px] font-bold py-1.5 rounded-lg border border-gray-700">
               <i class="fa-solid fa-camera"></i> 사진 업로드
@@ -168,7 +168,7 @@
     function getMyPick() { return localStorage.getItem(`voted_${matchId}`); }
 
     async function loadMatch() {
-      const res = await fetch(`/api/poll?id=${matchId}`);
+      const res = await fetch(`/api/poll?id=${matchId}&t=` + Date.now(), { cache: 'no-store' });
       currentMatch = await res.json();
       if (!currentMatch.id) return location.href = 'index.html';
 
@@ -281,7 +281,7 @@
     }
 
     async function loadComments() {
-      const res = await fetch(`/api/comments?page_id=${matchId}`);
+      const res = await fetch(`/api/comments?page_id=${matchId}&t=` + Date.now(), { cache: 'no-store' });
       const comments = await res.json();
 
       if (!comments || comments.length === 0) {
@@ -356,6 +356,13 @@
     }
 
     document.addEventListener('DOMContentLoaded', loadMatch);
+
+    // [뒤로가기 캐시 방지]
+    window.addEventListener('pageshow', (event) => {
+      if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+        loadMatch();
+      }
+    });
   </script>
 </body>
 </html>
