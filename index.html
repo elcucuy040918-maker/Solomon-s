@@ -7,38 +7,82 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
-</head>
-<body class="bg-[#0A0D14] text-gray-100 min-h-screen font-sans antialiased flex flex-col justify-between">
+  <style>
+    /* 타오르는 불꽃 글로우 텍스트 */
+    .flame-text {
+      background: linear-gradient(180deg, #FFF700 0%, #FF5500 50%, #FF0000 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 12px rgba(255, 68, 0, 0.8));
+      animation: flamePulse 1.8s infinite alternate ease-in-out;
+    }
 
-  <header class="sticky top-0 z-40 backdrop-blur-md bg-[#0A0D14]/90 border-b border-gray-800/80">
+    @keyframes flamePulse {
+      0% { filter: drop-shadow(0 0 8px rgba(255, 68, 0, 0.6)) drop-shadow(0 0 20px rgba(255, 100, 0, 0.4)); }
+      100% { filter: drop-shadow(0 0 16px rgba(255, 68, 0, 1)) drop-shadow(0 0 35px rgba(255, 0, 0, 0.8)); }
+    }
+
+    /* 불타는 카드 네온 테두리 */
+    .fire-card {
+      position: relative;
+      background: #121722;
+      border: 1px solid rgba(255, 85, 0, 0.3);
+      box-shadow: 0 0 20px rgba(255, 68, 0, 0.15);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+    }
+    .fire-card:hover {
+      border-color: rgba(255, 102, 0, 0.9);
+      box-shadow: 0 0 35px rgba(255, 68, 0, 0.4), inset 0 0 15px rgba(255, 68, 0, 0.2);
+    }
+
+    /* 스크롤 시 등장하는 탄성(Bounce/Elastic) 애니메이션 */
+    .elastic-card {
+      opacity: 0;
+      transform: translateY(60px) scale(0.92);
+      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+    }
+    .elastic-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  </style>
+</head>
+<body class="bg-[#0A0D14] text-gray-100 min-h-screen font-sans antialiased flex flex-col justify-between overflow-x-hidden">
+
+  <!-- 배경 화염 효과 그리드 오버레이 -->
+  <div class="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-orange-950/20 via-[#0A0D14] to-[#0A0D14] pointer-events-none z-0"></div>
+
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-[#0A0D14]/90 border-b border-orange-900/40">
     <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3 cursor-pointer" onclick="location.href='index.html'">
-        <span class="font-black italic tracking-widest text-3xl text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-indigo-400 to-red-500 uppercase">
+        <span class="font-black italic tracking-widest text-3xl text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-red-500 to-amber-400 uppercase">
           SOLOMON'S
         </span>
       </div>
-      <button onclick="location.href='list.html'" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-black px-4 py-2.5 rounded-xl border border-blue-400/30 transition flex items-center gap-2 shadow-lg shadow-blue-500/20">
+      <button onclick="location.href='list.html'" class="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white text-xs font-black px-4 py-2.5 rounded-xl border border-orange-400/30 transition flex items-center gap-2 shadow-lg shadow-orange-600/30">
         <i class="fa-solid fa-list-ul"></i> 전체 토론 보기
       </button>
     </div>
   </header>
 
-  <main class="max-w-4xl mx-auto px-4 py-10 w-full space-y-8">
-    <div class="flex items-center justify-between mb-4">
-      <div>
-        <span class="text-xs font-black uppercase tracking-widest text-red-400 bg-red-950/80 px-3 py-1 rounded-full border border-red-800/60 inline-flex items-center gap-1.5">
-          <i class="fa-solid fa-fire"></i> REALTIME HOT TOP 3
-        </span>
-        <h1 class="text-2xl md:text-3xl font-black mt-2 tracking-tight italic">인기 토론 TOP 3</h1>
-      </div>
+  <main class="max-w-4xl mx-auto px-4 py-12 w-full space-y-10 z-10 relative">
+    <div class="flex flex-col items-center text-center mb-6 space-y-2">
+      <span class="text-xs font-black uppercase tracking-widest text-amber-300 bg-gradient-to-r from-red-950 to-orange-950 px-4 py-1.5 rounded-full border border-orange-600/60 inline-flex items-center gap-2 shadow-lg shadow-orange-900/50">
+        <i class="fa-solid fa-fire text-orange-500 animate-bounce"></i> REALTIME HOT TOP 3
+      </span>
+      <h1 class="text-3xl md:text-5xl font-black tracking-tight italic flame-text py-2">
+        🔥 뜨거운 토론 TOP 3
+      </h1>
+      <p class="text-xs text-gray-400">지금 가장 격렬하게 불타오르는 3개의 토론에 참여하세요!</p>
     </div>
 
-    <div id="top3-container" class="space-y-6">
-      <div class="text-center py-10 text-gray-400">데이터를 불러오는 중입니다...</div>
+    <!-- 핫한 TOP 3 컨테이너 -->
+    <div id="top3-container" class="space-y-8">
+      <div class="text-center py-10 text-gray-400">불타는 토론 데이터를 불러오는 중...</div>
     </div>
   </main>
 
-  <footer class="border-t border-gray-800/60 py-8 text-center text-xs text-gray-500">
+  <footer class="border-t border-gray-800/60 py-8 text-center text-xs text-gray-500 z-10">
     © SOLOMON'S. All rights reserved.
   </footer>
 
@@ -60,22 +104,21 @@
 
         const html = top3.map((m, idx) => {
           const rankBadges = [
-            '<span class="text-xs font-black text-amber-400 bg-amber-950/90 border border-amber-600 px-3 py-1 rounded-full">🥇 1위</span>',
-            '<span class="text-xs font-black text-gray-300 bg-gray-900/90 border border-gray-600 px-3 py-1 rounded-full">🥈 2위</span>',
-            '<span class="text-xs font-black text-amber-600 bg-amber-950/90 border border-amber-800 px-3 py-1 rounded-full">🥉 3위</span>'
+            '<span class="text-xs font-black text-amber-300 bg-gradient-to-r from-amber-600 to-yellow-500 border border-amber-300/60 px-3.5 py-1 rounded-full shadow-md shadow-amber-500/20">🔥 1위 HOT</span>',
+            '<span class="text-xs font-black text-gray-200 bg-gradient-to-r from-gray-700 to-gray-600 border border-gray-400/50 px-3.5 py-1 rounded-full">🥈 2위</span>',
+            '<span class="text-xs font-black text-orange-300 bg-gradient-to-r from-orange-800 to-amber-700 border border-orange-500/50 px-3.5 py-1 rounded-full">🥉 3위</span>'
           ];
 
           const colorA = m.option_a_color || '#3B82F6';
           const colorB = m.option_b_color || '#EF4444';
 
-          // 사진 짤림 방지 (object-contain 적용)
           const imgA = m.option_a_img 
             ? `<img src="${m.option_a_img}" class="w-full h-full object-contain p-2">` 
-            : `<i class="fa-solid fa-user-ninja text-4xl opacity-60 mb-2"></i>`;
+            : `<i class="fa-solid fa-user-ninja text-5xl opacity-60 mb-2"></i>`;
 
           const imgB = m.option_b_img 
             ? `<img src="${m.option_b_img}" class="w-full h-full object-contain p-2">` 
-            : `<i class="fa-solid fa-user-ninja text-4xl opacity-60 mb-2"></i>`;
+            : `<i class="fa-solid fa-user-ninja text-5xl opacity-60 mb-2"></i>`;
 
           const vA = m.option_a_votes || 0;
           const vB = m.option_b_votes || 0;
@@ -87,54 +130,71 @@
           }
 
           return `
-            <div onclick="location.href='detail.html?id=${m.id}'" class="group relative rounded-3xl overflow-hidden border border-gray-800 hover:border-blue-500/80 bg-[#121722] transition duration-300 cursor-pointer shadow-2xl flex flex-col justify-between">
-              <div class="p-6 pb-2">
+            <div onclick="location.href='detail.html?id=${m.id}'" class="fire-card elastic-card group rounded-3xl overflow-hidden cursor-pointer flex flex-col justify-between p-2 md:p-4">
+              <div class="p-4 md:p-6 pb-2">
                 <div class="flex justify-between items-center mb-3">
                   ${rankBadges[idx]}
-                  <span class="text-xs text-gray-400 font-bold"><i class="fa-solid fa-users text-blue-400"></i> ${totalVotes}명 참여</span>
+                  <span class="text-xs text-orange-400 font-bold bg-orange-950/60 px-3 py-1 rounded-full border border-orange-800/50"><i class="fa-solid fa-fire-flame-curved text-red-500"></i> ${totalVotes}명 참여 중</span>
                 </div>
-                <h2 class="text-xl md:text-2xl font-black italic group-hover:text-blue-400 transition">${escapeHtml(m.title)}</h2>
-                ${m.description ? `<p class="text-xs text-amber-400/90 bg-amber-950/40 border border-amber-800/40 p-2 rounded-xl mt-2"><i class="fa-solid fa-circle-info mr-1"></i> ${escapeHtml(m.description)}</p>` : ''}
+                <h2 class="text-2xl md:text-3xl font-black italic group-hover:text-orange-400 transition-colors duration-300 py-1">${escapeHtml(m.title)}</h2>
+                ${m.description ? `<p class="text-xs text-amber-300/90 bg-amber-950/50 border border-amber-800/40 p-2.5 rounded-xl mt-2"><i class="fa-solid fa-circle-info mr-1"></i> ${escapeHtml(m.description)}</p>` : ''}
               </div>
 
-              <!-- 이미지 박스 (짤림 방지) -->
-              <div class="grid grid-cols-2 gap-3 p-4 bg-gray-950/50">
-                <div class="h-40 md:h-48 rounded-2xl border border-gray-800 bg-gray-900/80 flex flex-col items-center justify-center overflow-hidden">
+              <!-- 이미지 박스 -->
+              <div class="grid grid-cols-2 gap-4 p-4 bg-gray-950/70 rounded-2xl my-2">
+                <div class="h-44 md:h-56 rounded-2xl border border-gray-800 bg-gray-900/80 flex flex-col items-center justify-center overflow-hidden transition group-hover:border-orange-500/40">
                   ${imgA}
-                  <p class="text-sm font-black text-white mt-1">${escapeHtml(m.option_a_name)}</p>
-                  <span class="text-[11px] text-gray-400">${escapeHtml(m.option_a_team || '')}</span>
+                  <p class="text-base font-black text-white mt-1">${escapeHtml(m.option_a_name)}</p>
+                  <span class="text-xs text-gray-400">${escapeHtml(m.option_a_team || '')}</span>
                 </div>
-                <div class="h-40 md:h-48 rounded-2xl border border-gray-800 bg-gray-900/80 flex flex-col items-center justify-center overflow-hidden">
+                <div class="h-44 md:h-56 rounded-2xl border border-gray-800 bg-gray-900/80 flex flex-col items-center justify-center overflow-hidden transition group-hover:border-orange-500/40">
                   ${imgB}
-                  <p class="text-sm font-black text-white mt-1">${escapeHtml(m.option_b_name)}</p>
-                  <span class="text-[11px] text-gray-400">${escapeHtml(m.option_b_team || '')}</span>
+                  <p class="text-base font-black text-white mt-1">${escapeHtml(m.option_b_name)}</p>
+                  <span class="text-xs text-gray-400">${escapeHtml(m.option_b_team || '')}</span>
                 </div>
               </div>
 
               <!-- 게이지 바 & 퍼센트 -->
-              <div class="px-6 py-3 bg-gray-900/90 border-t border-gray-800/80 space-y-2">
-                <div class="flex justify-between text-xs font-black">
+              <div class="px-4 py-3 space-y-2">
+                <div class="flex justify-between text-xs md:text-sm font-black">
                   <span style="color: ${colorA}">${escapeHtml(m.option_a_name)} ${pA}% (${vA}표)</span>
                   <span style="color: ${colorB}">${escapeHtml(m.option_b_name)} ${pB}% (${vB}표)</span>
                 </div>
-                <div class="w-full bg-gray-800 h-3 rounded-full overflow-hidden flex">
-                  <div style="width: ${pA}%; background-color: ${colorA};" class="h-full transition-all duration-500"></div>
-                  <div style="width: ${pB}%; background-color: ${colorB};" class="h-full transition-all duration-500"></div>
+                <div class="w-full bg-gray-900 h-4 rounded-full overflow-hidden flex border border-gray-800 p-0.5">
+                  <div style="width: ${pA}%; background-color: ${colorA};" class="h-full rounded-full transition-all duration-500 shadow-md"></div>
+                  <div style="width: ${pB}%; background-color: ${colorB};" class="h-full rounded-full transition-all duration-500 shadow-md"></div>
                 </div>
               </div>
 
-              <div class="p-4 border-t border-gray-800/80 flex justify-between items-center text-xs text-gray-400 bg-gray-950">
-                <span class="font-bold">실시간 토론 참여하기</span>
-                <span class="text-blue-400 font-black group-hover:translate-x-1.5 transition">입장하기 →</span>
+              <div class="p-4 border-t border-gray-800/80 flex justify-between items-center text-xs text-gray-400 bg-gray-950/50 rounded-b-2xl">
+                <span class="font-bold text-orange-400/90"><i class="fa-solid fa-bolt mr-1"></i>지금 격돌에 뛰어들기</span>
+                <span class="text-orange-400 font-black group-hover:translate-x-2 transition-transform duration-300">입장하기 →</span>
               </div>
             </div>
           `;
         }).join('');
 
         document.getElementById('top3-container').innerHTML = html;
+
+        // 스크롤 탄성 애니메이션 관찰자 적용
+        observeElasticCards();
+
       } catch (e) {
         document.getElementById('top3-container').innerHTML = '<div class="text-center py-10 text-red-400">데이터를 불러오지 못했습니다.</div>';
       }
+    }
+
+    // IntersectionObserver를 통한 Elastic Scroll 관찰 함수
+    function observeElasticCards() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.15 });
+
+      document.querySelectorAll('.elastic-card').forEach(card => observer.observe(card));
     }
 
     document.addEventListener('DOMContentLoaded', renderTop3);
