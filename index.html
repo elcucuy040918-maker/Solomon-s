@@ -21,7 +21,6 @@
     body { font-family: 'Noto Sans KR', sans-serif; }
     .font-sports-title { font-family: 'Oswald', 'Noto Sans KR', sans-serif; }
 
-    /* 감각적인 스크롤 애니메이션 */
     .reveal-card {
       opacity: 0;
       transform: translateY(40px) scale(0.98);
@@ -47,7 +46,6 @@
         </span>
       </div>
       
-      <!-- 오른쪽 상단: '전체 토론 보기' 단일 버튼 -->
       <div>
         <button onclick="openListModal()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-black px-4 py-2.5 rounded-xl border border-blue-400/30 transition flex items-center gap-2 shadow-lg shadow-blue-500/20">
           <i class="fa-solid fa-list-ul"></i> 전체 토론 보기
@@ -56,7 +54,7 @@
     </div>
   </header>
 
-  <!-- 메인 핫 토론 TOP 3 영역 (세로 나열 구조) -->
+  <!-- 메인 핫 토론 TOP 3 (더미 이미지 완전히 제거된 카드) -->
   <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full space-y-8">
     <div class="flex items-center justify-between mb-4">
       <div>
@@ -67,7 +65,6 @@
       </div>
     </div>
 
-    <!-- HOT 토론 카드 세로 나열 Container -->
     <div class="space-y-10">
       
       <!-- HOT 매치 1 -->
@@ -80,16 +77,17 @@
           <h2 class="text-xl md:text-2xl font-black italic tracking-wide group-hover:text-blue-400 transition">2020년대 최고의 EPL 윙어는?</h2>
         </div>
 
-        <div class="grid grid-cols-2 gap-2 p-4 bg-gray-950/50">
-          <div class="h-48 md:h-64 rounded-2xl overflow-hidden relative border border-gray-800">
-            <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-            <p class="absolute bottom-3 left-3 text-sm md:text-base font-black text-white">손흥민</p>
+        <!-- 이미지 더미 파일 없이 깔끔한 카드 레이아웃 -->
+        <div class="grid grid-cols-2 gap-3 p-4 bg-gray-950/50">
+          <div class="h-40 md:h-52 rounded-2xl border border-blue-900/40 bg-gradient-to-br from-blue-950/40 to-gray-900/80 flex flex-col items-center justify-center p-4 text-center">
+            <i class="fa-solid fa-user-ninja text-4xl text-blue-400/60 mb-2"></i>
+            <p class="text-base md:text-lg font-black text-white">손흥민</p>
+            <span class="text-xs text-blue-400/80 mt-1">토트넘 홋스퍼</span>
           </div>
-          <div class="h-48 md:h-64 rounded-2xl overflow-hidden relative border border-gray-800">
-            <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-            <p class="absolute bottom-3 left-3 text-sm md:text-base font-black text-white">모하메드 살라</p>
+          <div class="h-40 md:h-52 rounded-2xl border border-red-900/40 bg-gradient-to-br from-red-950/40 to-gray-900/80 flex flex-col items-center justify-center p-4 text-center">
+            <i class="fa-solid fa-user-ninja text-4xl text-red-400/60 mb-2"></i>
+            <p class="text-base md:text-lg font-black text-white">모하메드 살라</p>
+            <span class="text-xs text-red-400/80 mt-1">리버풀 FC</span>
           </div>
         </div>
 
@@ -109,16 +107,16 @@
           <h2 class="text-xl md:text-2xl font-black italic tracking-wide group-hover:text-blue-400 transition">축구 역사상 영원한 GOAT는?</h2>
         </div>
 
-        <div class="grid grid-cols-2 gap-2 p-4 bg-gray-950/50">
-          <div class="h-48 md:h-64 rounded-2xl overflow-hidden relative border border-gray-800">
-            <img src="https://images.unsplash.com/photo-1518091043644-c1d4457512c6?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-            <p class="absolute bottom-3 left-3 text-sm md:text-base font-black text-white">리오넬 메시</p>
+        <div class="grid grid-cols-2 gap-3 p-4 bg-gray-950/50">
+          <div class="h-40 md:h-52 rounded-2xl border border-amber-900/30 bg-gradient-to-br from-amber-950/20 to-gray-900/80 flex flex-col items-center justify-center p-4 text-center">
+            <i class="fa-solid fa-crown text-4xl text-amber-400/60 mb-2"></i>
+            <p class="text-base md:text-lg font-black text-white">리오넬 메시</p>
+            <span class="text-xs text-amber-400/80 mt-1">인터 마이애미</span>
           </div>
-          <div class="h-48 md:h-64 rounded-2xl overflow-hidden relative border border-gray-800">
-            <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-            <p class="absolute bottom-3 left-3 text-sm md:text-base font-black text-white">크리스티아누 호날두</p>
+          <div class="h-40 md:h-52 rounded-2xl border border-amber-900/30 bg-gradient-to-br from-amber-950/20 to-gray-900/80 flex flex-col items-center justify-center p-4 text-center">
+            <i class="fa-solid fa-crown text-4xl text-amber-400/60 mb-2"></i>
+            <p class="text-base md:text-lg font-black text-white">크리스티아누 호날두</p>
+            <span class="text-xs text-amber-400/80 mt-1">알 나스르</span>
           </div>
         </div>
 
@@ -138,16 +136,16 @@
           <h2 class="text-xl md:text-2xl font-black italic tracking-wide group-hover:text-blue-400 transition">2010년대 최고의 패스 마스터는?</h2>
         </div>
 
-        <div class="grid grid-cols-2 gap-2 p-4 bg-gray-950/50">
-          <div class="h-48 md:h-64 rounded-2xl overflow-hidden relative border border-gray-800">
-            <img src="https://images.unsplash.com/photo-1560272564-669520747490?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-            <p class="absolute bottom-3 left-3 text-sm md:text-base font-black text-white">케빈 더 브라위너</p>
+        <div class="grid grid-cols-2 gap-3 p-4 bg-gray-950/50">
+          <div class="h-40 md:h-52 rounded-2xl border border-blue-900/30 bg-gradient-to-br from-blue-950/20 to-gray-900/80 flex flex-col items-center justify-center p-4 text-center">
+            <i class="fa-solid fa-football text-4xl text-blue-400/60 mb-2"></i>
+            <p class="text-base md:text-lg font-black text-white">케빈 더 브라위너</p>
+            <span class="text-xs text-blue-400/80 mt-1">맨체스터 시티</span>
           </div>
-          <div class="h-48 md:h-64 rounded-2xl overflow-hidden relative border border-gray-800">
-            <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-            <p class="absolute bottom-3 left-3 text-sm md:text-base font-black text-white">루카 모드리치</p>
+          <div class="h-40 md:h-52 rounded-2xl border border-red-900/30 bg-gradient-to-br from-red-950/20 to-gray-900/80 flex flex-col items-center justify-center p-4 text-center">
+            <i class="fa-solid fa-football text-4xl text-red-400/60 mb-2"></i>
+            <p class="text-base md:text-lg font-black text-white">루카 모드리치</p>
+            <span class="text-xs text-red-400/80 mt-1">레알 마드리드</span>
           </div>
         </div>
 
@@ -182,7 +180,7 @@
     </div>
   </div>
 
-  <!-- 팝업 2: 새 토론 주제 추가 모달 (이미지 업로드 버튼 포함) -->
+  <!-- 팝업 2: 새 토론 주제 추가 모달 (사용자 직접 업로드 기능) -->
   <div id="create-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="bg-[#121722] border border-gray-800 rounded-2xl w-full max-w-lg p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-gray-800 pb-3">
@@ -205,9 +203,8 @@
             <input type="text" id="modal-a-name" placeholder="이름 (예: 엘링 홀란드)" required class="bg-gray-900 border border-gray-700 text-white rounded-lg p-2">
             <input type="text" id="modal-a-team" placeholder="팀/소속 (예: 맨체스터 시티)" class="bg-gray-900 border border-gray-700 text-white rounded-lg p-2">
           </div>
-          <!-- 이미지 업로드 버튼 & URL 입력 -->
           <div class="space-y-1">
-            <label class="block text-gray-400 text-[11px] font-bold">이미지 선택 (파일 업로드 또는 URL)</label>
+            <label class="block text-gray-400 text-[11px] font-bold">이미지 등록 (선택)</label>
             <div class="flex gap-2">
               <input type="file" id="modal-a-file" accept="image/*" onchange="handleFileSelect(event, 'a')" class="hidden">
               <button type="button" onclick="document.getElementById('modal-a-file').click()" class="bg-blue-900/80 hover:bg-blue-800 text-blue-200 px-3 py-1.5 rounded-lg border border-blue-700 font-bold flex items-center gap-1.5 shrink-0">
@@ -228,9 +225,8 @@
             <input type="text" id="modal-b-name" placeholder="이름 (예: 킬리안 음바페)" required class="bg-gray-900 border border-gray-700 text-white rounded-lg p-2">
             <input type="text" id="modal-b-team" placeholder="팀/소속 (예: 레알 마드리드)" class="bg-gray-900 border border-gray-700 text-white rounded-lg p-2">
           </div>
-          <!-- 이미지 업로드 버튼 & URL 입력 -->
           <div class="space-y-1">
-            <label class="block text-gray-400 text-[11px] font-bold">이미지 선택 (파일 업로드 또는 URL)</label>
+            <label class="block text-gray-400 text-[11px] font-bold">이미지 등록 (선택)</label>
             <div class="flex gap-2">
               <input type="file" id="modal-b-file" accept="image/*" onchange="handleFileSelect(event, 'b')" class="hidden">
               <button type="button" onclick="document.getElementById('modal-b-file').click()" class="bg-red-900/80 hover:bg-red-800 text-red-200 px-3 py-1.5 rounded-lg border border-red-700 font-bold flex items-center gap-1.5 shrink-0">
@@ -258,18 +254,53 @@
     let uploadedImgA = '';
     let uploadedImgB = '';
 
+    // 사용자 업로드 이미지 리사이징 (용량 압축)
+    function compressImage(file, callback) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+          const maxDim = 600;
+
+          if (width > maxDim || height > maxDim) {
+            if (width > height) {
+              height = Math.round((height * maxDim) / width);
+              width = maxDim;
+            } else {
+              width = Math.round((width * maxDim) / height);
+              height = maxDim;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.7);
+          callback(compressedDataUrl);
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // 기본 매치 데이터 (모든 더미 이미지 URL 완벽 제거)
     const presetHotMatches = {
       'hot_goat': {
         id: 'hot_goat',
         title: '축구 역사상 영원한 GOAT는?',
-        optionA: { name: '리오넬 메시', team: '인터 마이애미', img: 'https://images.unsplash.com/photo-1518091043644-c1d4457512c6?auto=format&fit=crop&w=600&q=80', votes: 120 },
-        optionB: { name: '크리스티아누 호날두', team: '알 나스르', img: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80', votes: 98 }
+        optionA: { name: '리오넬 메시', team: '인터 마이애미', img: '', votes: 120 },
+        optionB: { name: '크리스티아누 호날두', team: '알 나스르', img: '', votes: 98 }
       },
       'hot_midfield': {
         id: 'hot_midfield',
         title: '2010년대 최고의 패스 마스터는?',
-        optionA: { name: '케빈 더 브라위너', team: '맨체스터 시티', img: 'https://images.unsplash.com/photo-1560272564-669520747490?auto=format&fit=crop&w=600&q=80', votes: 85 },
-        optionB: { name: '루카 모드리치', team: '레알 마드리드', img: 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=600&q=80', votes: 77 }
+        optionA: { name: '케빈 더 브라위너', team: '맨체스터 시티', img: '', votes: 85 },
+        optionB: { name: '루카 모드리치', team: '레알 마드리드', img: '', votes: 77 }
       }
     };
 
@@ -278,27 +309,23 @@
       return saved ? JSON.parse(saved) : [];
     }
 
-    // 파일 선택 및 미리보기 로직
     function handleFileSelect(e, target) {
       const file = e.target.files[0];
       if (!file) return;
 
-      const reader = new FileReader();
-      reader.onload = function(evt) {
+      compressImage(file, (compressedBase64) => {
         if (target === 'a') {
-          uploadedImgA = evt.target.result;
+          uploadedImgA = compressedBase64;
           document.getElementById('preview-a').src = uploadedImgA;
           document.getElementById('preview-a-container').classList.remove('hidden');
         } else {
-          uploadedImgB = evt.target.result;
+          uploadedImgB = compressedBase64;
           document.getElementById('preview-b').src = uploadedImgB;
           document.getElementById('preview-b-container').classList.remove('hidden');
         }
-      };
-      reader.readAsDataURL(file);
+      });
     }
 
-    // 모달 제어
     function openListModal() { 
       renderModalMatches();
       document.getElementById('list-modal').classList.remove('hidden'); 
@@ -320,12 +347,12 @@
       const aName = document.getElementById('modal-a-name').value.trim();
       const aTeam = document.getElementById('modal-a-team').value.trim() || 'A팀';
       const urlA = document.getElementById('modal-a-img').value.trim();
-      const aImg = uploadedImgA || urlA || 'https://images.unsplash.com/photo-1518091043644-c1d4457512c6?auto=format&fit=crop&w=600&q=80';
+      const aImg = uploadedImgA || urlA || '';
 
       const bName = document.getElementById('modal-b-name').value.trim();
       const bTeam = document.getElementById('modal-b-team').value.trim() || 'B팀';
       const urlB = document.getElementById('modal-b-img').value.trim();
-      const bImg = uploadedImgB || urlB || 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80';
+      const bImg = uploadedImgB || urlB || '';
 
       const newMatch = {
         id: `match_${Date.now()}`,
@@ -336,7 +363,13 @@
 
       const list = getCustomMatches();
       list.unshift(newMatch);
-      localStorage.setItem('custom_matches', JSON.stringify(list));
+      
+      try {
+        localStorage.setItem('custom_matches', JSON.stringify(list));
+      } catch (err) {
+        alert("저장 용량이 부족합니다. 더 작거나 가벼운 이미지로 시도해 주세요.");
+        return;
+      }
 
       closeCreateModal();
       e.target.reset();
@@ -351,7 +384,7 @@
         container.innerHTML = `
           <div class="border border-dashed border-gray-800 rounded-2xl p-8 text-center text-gray-500">
             <i class="fa-solid fa-folder-open text-2xl mb-2 text-gray-600 block"></i>
-            <p class="text-xs">아직 등록된 추가 토론 매치가 없습니다.<br>상단의 <strong>+ 새 토론 주제 추가</strong> 버튼으로 첫 매치를 등록해보세요!</p>
+            <p class="text-xs">아직 직접 생성된 토론 매치가 없습니다.<br>상단의 <strong>+ 새 토론 주제 추가</strong> 버튼으로 매치를 등록해보세요!</p>
           </div>`;
         return;
       }
@@ -372,7 +405,6 @@
       `).join('');
     }
 
-    // 스크롤 감지 애니메이션 (Intersection Observer)
     document.addEventListener("DOMContentLoaded", () => {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
