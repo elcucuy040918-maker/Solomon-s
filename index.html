@@ -20,15 +20,14 @@
   <style>
     body { font-family: 'Noto Sans KR', sans-serif; }
     .font-sports-title { font-family: 'Oswald', 'Noto Sans KR', sans-serif; }
-
     .reveal-card {
       opacity: 0;
-      transform: translateY(40px) scale(0.98);
-      transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
     }
     .reveal-card.active {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: translateY(0);
     }
   </style>
 </head>
@@ -54,30 +53,28 @@
     </div>
   </header>
 
-  <!-- 메인 핫 토론 TOP 3 (더미 이미지 완전히 제거된 카드) -->
+  <!-- 메인 토론 영역 (단일 매치) -->
   <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full space-y-8">
     <div class="flex items-center justify-between mb-4">
       <div>
         <span class="text-xs font-black uppercase tracking-widest text-red-400 bg-red-950/80 px-3 py-1 rounded-full border border-red-800/60 inline-flex items-center gap-1.5">
           <i class="fa-solid fa-fire"></i> REALTIME HOT ISSUE
         </span>
-        <h1 class="text-2xl md:text-3xl font-black mt-2 tracking-tight italic">지금 가장 핫한 토론 TOP 3</h1>
+        <h1 class="text-2xl md:text-3xl font-black mt-2 tracking-tight italic">메인 토론 매치</h1>
       </div>
     </div>
 
-    <div class="space-y-10">
-      
-      <!-- HOT 매치 1 -->
-      <div onclick="location.href='detail.html?id=main'" class="reveal-card group relative rounded-3xl overflow-hidden border border-red-500/40 bg-[#121722] hover:border-red-500 transition-all duration-300 cursor-pointer shadow-2xl flex flex-col justify-between">
+    <!-- 2020년대 최고의 프리미어리그 윙어는? 주제만 남김 -->
+    <div class="space-y-6">
+      <div onclick="location.href='detail.html?id=main'" class="reveal-card active group relative rounded-3xl overflow-hidden border border-red-500/40 bg-[#121722] hover:border-red-500 transition-all duration-300 cursor-pointer shadow-2xl flex flex-col justify-between">
         <div class="p-6">
           <div class="flex justify-between items-center mb-3">
-            <span class="text-xs font-black text-red-400 bg-red-950/90 border border-red-800 px-3 py-1 rounded-full">🔥 HOT #1</span>
-            <span class="text-xs text-gray-400"><i class="fa-solid fa-fire text-red-500"></i> 메인 매치</span>
+            <span class="text-xs font-black text-red-400 bg-red-950/90 border border-red-800 px-3 py-1 rounded-full">🔥 MAIN MATCH</span>
+            <span class="text-xs text-gray-400"><i class="fa-solid fa-fire text-red-500"></i> 프리미어리그</span>
           </div>
-          <h2 class="text-xl md:text-2xl font-black italic tracking-wide group-hover:text-blue-400 transition">2020년대 최고의 EPL 윙어는?</h2>
+          <h2 class="text-xl md:text-2xl font-black italic tracking-wide group-hover:text-blue-400 transition">2020년대 최고의 프리미어리그 윙어는?</h2>
         </div>
 
-        <!-- 이미지 더미 파일 없이 깔끔한 카드 레이아웃 -->
         <div class="grid grid-cols-2 gap-3 p-4 bg-gray-950/50">
           <div class="h-40 md:h-52 rounded-2xl border border-blue-900/40 bg-gradient-to-br from-blue-950/40 to-gray-900/80 flex flex-col items-center justify-center p-4 text-center">
             <i class="fa-solid fa-user-ninja text-4xl text-blue-400/60 mb-2"></i>
@@ -96,65 +93,6 @@
           <span class="text-blue-400 font-black group-hover:translate-x-1.5 transition">투표 참여하기 →</span>
         </div>
       </div>
-
-      <!-- HOT 매치 2 -->
-      <div onclick="location.href='detail.html?id=hot_goat'" class="reveal-card group relative rounded-3xl overflow-hidden border border-gray-800/80 bg-[#121722] hover:border-blue-500/80 transition-all duration-300 cursor-pointer shadow-2xl flex flex-col justify-between">
-        <div class="p-6">
-          <div class="flex justify-between items-center mb-3">
-            <span class="text-xs font-black text-amber-400 bg-amber-950/90 border border-amber-800 px-3 py-1 rounded-full">🔥 HOT #2</span>
-            <span class="text-xs text-gray-400"><i class="fa-solid fa-trophy text-amber-500"></i> 레전드</span>
-          </div>
-          <h2 class="text-xl md:text-2xl font-black italic tracking-wide group-hover:text-blue-400 transition">축구 역사상 영원한 GOAT는?</h2>
-        </div>
-
-        <div class="grid grid-cols-2 gap-3 p-4 bg-gray-950/50">
-          <div class="h-40 md:h-52 rounded-2xl border border-amber-900/30 bg-gradient-to-br from-amber-950/20 to-gray-900/80 flex flex-col items-center justify-center p-4 text-center">
-            <i class="fa-solid fa-crown text-4xl text-amber-400/60 mb-2"></i>
-            <p class="text-base md:text-lg font-black text-white">리오넬 메시</p>
-            <span class="text-xs text-amber-400/80 mt-1">인터 마이애미</span>
-          </div>
-          <div class="h-40 md:h-52 rounded-2xl border border-amber-900/30 bg-gradient-to-br from-amber-950/20 to-gray-900/80 flex flex-col items-center justify-center p-4 text-center">
-            <i class="fa-solid fa-crown text-4xl text-amber-400/60 mb-2"></i>
-            <p class="text-base md:text-lg font-black text-white">크리스티아누 호날두</p>
-            <span class="text-xs text-amber-400/80 mt-1">알 나스르</span>
-          </div>
-        </div>
-
-        <div class="p-5 border-t border-gray-800/80 flex justify-between items-center text-xs md:text-sm text-gray-400 bg-gray-900/60">
-          <span class="font-bold">메시 VS 호날두</span>
-          <span class="text-blue-400 font-black group-hover:translate-x-1.5 transition">투표 참여하기 →</span>
-        </div>
-      </div>
-
-      <!-- HOT 매치 3 -->
-      <div onclick="location.href='detail.html?id=hot_midfield'" class="reveal-card group relative rounded-3xl overflow-hidden border border-gray-800/80 bg-[#121722] hover:border-blue-500/80 transition-all duration-300 cursor-pointer shadow-2xl flex flex-col justify-between">
-        <div class="p-6">
-          <div class="flex justify-between items-center mb-3">
-            <span class="text-xs font-black text-amber-400 bg-amber-950/90 border border-amber-800 px-3 py-1 rounded-full">🔥 HOT #3</span>
-            <span class="text-xs text-gray-400"><i class="fa-solid fa-award text-blue-500"></i> 미드필더</span>
-          </div>
-          <h2 class="text-xl md:text-2xl font-black italic tracking-wide group-hover:text-blue-400 transition">2010년대 최고의 패스 마스터는?</h2>
-        </div>
-
-        <div class="grid grid-cols-2 gap-3 p-4 bg-gray-950/50">
-          <div class="h-40 md:h-52 rounded-2xl border border-blue-900/30 bg-gradient-to-br from-blue-950/20 to-gray-900/80 flex flex-col items-center justify-center p-4 text-center">
-            <i class="fa-solid fa-football text-4xl text-blue-400/60 mb-2"></i>
-            <p class="text-base md:text-lg font-black text-white">케빈 더 브라위너</p>
-            <span class="text-xs text-blue-400/80 mt-1">맨체스터 시티</span>
-          </div>
-          <div class="h-40 md:h-52 rounded-2xl border border-red-900/30 bg-gradient-to-br from-red-950/20 to-gray-900/80 flex flex-col items-center justify-center p-4 text-center">
-            <i class="fa-solid fa-football text-4xl text-red-400/60 mb-2"></i>
-            <p class="text-base md:text-lg font-black text-white">루카 모드리치</p>
-            <span class="text-xs text-red-400/80 mt-1">레알 마드리드</span>
-          </div>
-        </div>
-
-        <div class="p-5 border-t border-gray-800/80 flex justify-between items-center text-xs md:text-sm text-gray-400 bg-gray-900/60">
-          <span class="font-bold">더 브라위너 VS 모드리치</span>
-          <span class="text-blue-400 font-black group-hover:translate-x-1.5 transition">투표 참여하기 →</span>
-        </div>
-      </div>
-
     </div>
   </main>
 
@@ -180,7 +118,7 @@
     </div>
   </div>
 
-  <!-- 팝업 2: 새 토론 주제 추가 모달 (사용자 직접 업로드 기능) -->
+  <!-- 팝업 2: 새 토론 주제 추가 모달 -->
   <div id="create-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="bg-[#121722] border border-gray-800 rounded-2xl w-full max-w-lg p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-gray-800 pb-3">
@@ -254,7 +192,6 @@
     let uploadedImgA = '';
     let uploadedImgB = '';
 
-    // 사용자 업로드 이미지 리사이징 (용량 압축)
     function compressImage(file, callback) {
       const reader = new FileReader();
       reader.onload = function(e) {
@@ -287,22 +224,6 @@
       };
       reader.readAsDataURL(file);
     }
-
-    // 기본 매치 데이터 (모든 더미 이미지 URL 완벽 제거)
-    const presetHotMatches = {
-      'hot_goat': {
-        id: 'hot_goat',
-        title: '축구 역사상 영원한 GOAT는?',
-        optionA: { name: '리오넬 메시', team: '인터 마이애미', img: '', votes: 120 },
-        optionB: { name: '크리스티아누 호날두', team: '알 나스르', img: '', votes: 98 }
-      },
-      'hot_midfield': {
-        id: 'hot_midfield',
-        title: '2010년대 최고의 패스 마스터는?',
-        optionA: { name: '케빈 더 브라위너', team: '맨체스터 시티', img: '', votes: 85 },
-        optionB: { name: '루카 모드리치', team: '레알 마드리드', img: '', votes: 77 }
-      }
-    };
 
     function getCustomMatches() {
       const saved = localStorage.getItem('custom_matches');
@@ -367,7 +288,7 @@
       try {
         localStorage.setItem('custom_matches', JSON.stringify(list));
       } catch (err) {
-        alert("저장 용량이 부족합니다. 더 작거나 가벼운 이미지로 시도해 주세요.");
+        alert("저장 용량이 부족합니다.");
         return;
       }
 
@@ -380,44 +301,33 @@
       const container = document.getElementById('modal-match-list');
       const list = getCustomMatches();
 
-      if (list.length === 0) {
-        container.innerHTML = `
-          <div class="border border-dashed border-gray-800 rounded-2xl p-8 text-center text-gray-500">
-            <i class="fa-solid fa-folder-open text-2xl mb-2 text-gray-600 block"></i>
-            <p class="text-xs">아직 직접 생성된 토론 매치가 없습니다.<br>상단의 <strong>+ 새 토론 주제 추가</strong> 버튼으로 매치를 등록해보세요!</p>
-          </div>`;
-        return;
+      let html = `
+        <div onclick="location.href='detail.html?id=main'" class="bg-gray-900/90 border border-red-900/50 hover:border-red-500 rounded-2xl p-4 shadow-lg flex items-center justify-between cursor-pointer transition">
+          <div class="space-y-1">
+            <span class="text-[10px] font-black text-red-400 bg-red-950 px-2 py-0.5 rounded">MAIN</span>
+            <h4 class="text-sm font-black italic text-white">2020년대 최고의 프리미어리그 윙어는?</h4>
+            <p class="text-xs text-gray-400">손흥민 VS 모하메드 살라</p>
+          </div>
+          <span class="text-xs text-gray-300 font-bold">입장 →</span>
+        </div>
+      `;
+
+      if (list.length > 0) {
+        html += list.map(m => `
+          <div onclick="location.href='detail.html?id=${m.id}'" class="bg-gray-900/90 border border-gray-800 hover:border-blue-500/80 rounded-2xl p-4 shadow-lg flex items-center justify-between cursor-pointer transition">
+            <div class="space-y-1">
+              <h4 class="text-sm font-black italic text-white">${escapeHtml(m.title)}</h4>
+              <p class="text-xs text-gray-400">${escapeHtml(m.optionA.name)} VS ${escapeHtml(m.optionB.name)}</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-xs text-gray-300 font-bold">입장 →</span>
+            </div>
+          </div>
+        `).join('');
       }
 
-      container.innerHTML = list.map(m => `
-        <div onclick="location.href='detail.html?id=${m.id}'" class="bg-gray-900/90 border border-gray-800 hover:border-blue-500/80 rounded-2xl p-4 shadow-lg flex items-center justify-between cursor-pointer transition">
-          <div class="space-y-1">
-            <h4 class="text-sm font-black italic text-white">${escapeHtml(m.title)}</h4>
-            <p class="text-xs text-gray-400">${escapeHtml(m.optionA.name)} VS ${escapeHtml(m.optionB.name)}</p>
-          </div>
-          <div class="flex items-center gap-3">
-            <span class="text-xs text-blue-400 font-bold bg-blue-950/60 px-3 py-1 rounded-full border border-blue-900">
-              총 ${(m.optionA.votes || 0) + (m.optionB.votes || 0)}명
-            </span>
-            <span class="text-xs text-gray-300 font-bold">입장 →</span>
-          </div>
-        </div>
-      `).join('');
+      container.innerHTML = html;
     }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-          }
-        });
-      }, { threshold: 0.15 });
-
-      document.querySelectorAll('.reveal-card').forEach(card => observer.observe(card));
-    });
-
-    localStorage.setItem('preset_matches', JSON.stringify(presetHotMatches));
   </script>
 </body>
 </html>
