@@ -22,107 +22,199 @@
     .font-sports-title { font-family: 'Oswald', 'Noto Sans KR', sans-serif; }
   </style>
 </head>
-<body class="bg-[#0A0D14] text-gray-100 min-h-screen font-sans antialiased">
+<body class="bg-[#0A0D14] text-gray-100 min-h-screen font-sans antialiased flex flex-col justify-between">
 
   <!-- 상단 네비게이션 -->
-  <header class="sticky top-0 z-50 backdrop-blur-md bg-[#0A0D14]/90 border-b border-gray-800/80">
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-[#0A0D14]/90 border-b border-gray-800/80">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3 cursor-pointer" onclick="location.href='index.html'">
         <span class="font-sports-title text-3xl font-black italic tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-indigo-400 to-red-500 uppercase">
           SOLOMON'S
         </span>
-        <span class="bg-red-500/20 text-red-400 text-xs font-black px-2.5 py-0.5 rounded-full border border-red-500/40 animate-pulse tracking-wider">
-          LIVE VOTE
+        <span class="bg-red-500/20 text-red-400 text-xs font-black px-2.5 py-0.5 rounded-full border border-red-500/40 animate-pulse tracking-wider hidden sm:inline-block">
+          HOT DEBATE
         </span>
       </div>
-      <nav class="flex items-center space-x-4 text-sm font-bold uppercase tracking-wider">
-        <button onclick="openModal()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-black px-3.5 py-2 rounded-xl border border-blue-400/30 transition flex items-center gap-1.5 shadow-lg shadow-blue-500/20">
-          <i class="fa-solid fa-plus"></i> 토론 주제 추가
+      
+      <!-- 오른쪽 상단: '전체 토론 보기' 단일 버튼 -->
+      <div>
+        <button onclick="openListModal()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-black px-4 py-2.5 rounded-xl border border-blue-400/30 transition flex items-center gap-2 shadow-lg shadow-blue-500/20">
+          <i class="fa-solid fa-list-ul"></i> 전체 토론 보기
         </button>
-      </nav>
+      </div>
     </div>
   </header>
 
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+  <!-- 메인 핫 토론 TOP 3 영역만 배치 -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full my-auto">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <span class="text-xs font-black uppercase tracking-widest text-red-400 bg-red-950/80 px-3 py-1 rounded-full border border-red-800/60 inline-flex items-center gap-1.5">
+          <i class="fa-solid fa-fire"></i> REALTIME HOT ISSUE
+        </span>
+        <h1 class="text-2xl md:text-3xl font-black mt-2 tracking-tight italic">지금 가장 핫한 토론 TOP 3</h1>
+      </div>
+    </div>
 
-    <!-- 메인 핫 토론 매치 (클릭 시 detail.html로 이동) -->
-    <section onclick="location.href='detail.html?id=main'" class="relative rounded-3xl overflow-hidden border border-gray-800/80 bg-[#121722] hover:border-blue-500/50 transition cursor-pointer shadow-2xl p-6 md:p-8">
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-        <div>
-          <span class="text-xs font-black uppercase tracking-widest text-red-400 bg-red-950/80 px-3 py-1 rounded-full border border-red-800/60 inline-flex items-center gap-1.5">
-            <i class="fa-solid fa-fire"></i> 오늘 가장 뜨거운 메인 매치 (클릭하여 참여)
-          </span>
-          <h1 class="text-2xl md:text-4xl font-black mt-2 tracking-tight italic">2020년대 최고의 프리미어리그 윙어는?</h1>
+    <!-- HOT 토론 카드 3개 -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <!-- HOT 매치 1 -->
+      <div onclick="location.href='detail.html?id=main'" class="group relative rounded-2xl overflow-hidden border border-red-500/30 bg-[#121722] hover:border-red-500 transition cursor-pointer shadow-2xl flex flex-col justify-between">
+        <div class="p-5">
+          <div class="flex justify-between items-center mb-3">
+            <span class="text-[10px] font-black text-red-400 bg-red-950/90 border border-red-800 px-2 py-0.5 rounded-full">🔥 HOT #1</span>
+            <span class="text-xs text-gray-400"><i class="fa-solid fa-fire text-red-500"></i> 메인 매치</span>
+          </div>
+          <h2 class="text-lg font-black italic tracking-wide group-hover:text-blue-400 transition">2020년대 최고의 EPL 윙어는?</h2>
         </div>
-        <div class="text-xs text-blue-400 font-bold bg-blue-950/80 px-4 py-2 rounded-xl border border-blue-800 w-fit">
-          투표 & 토론 참여하기 →
+
+        <div class="grid grid-cols-2 gap-1 p-3 bg-gray-950/50">
+          <div class="h-36 rounded-xl overflow-hidden relative border border-gray-800">
+            <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent"></div>
+            <p class="absolute bottom-2 left-2 text-xs font-bold text-white">손흥민</p>
+          </div>
+          <div class="h-36 rounded-xl overflow-hidden relative border border-gray-800">
+            <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent"></div>
+            <p class="absolute bottom-2 left-2 text-xs font-bold text-white">모하메드 살라</p>
+          </div>
+        </div>
+
+        <div class="p-4 border-t border-gray-800/80 flex justify-between items-center text-xs text-gray-400 bg-gray-900/60">
+          <span>손흥민 VS 살라</span>
+          <span class="text-blue-400 font-bold group-hover:translate-x-1 transition">투표하기 →</span>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
-        <div class="h-64 rounded-2xl overflow-hidden relative border border-gray-800">
-          <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=900&q=80" class="w-full h-full object-cover">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-          <div class="absolute bottom-4 left-4"><span class="text-xs text-blue-400 font-bold">토트넘</span><h3 class="text-2xl font-black">손흥민</h3></div>
+      <!-- HOT 매치 2 -->
+      <div onclick="location.href='detail.html?id=hot_goat'" class="group relative rounded-2xl overflow-hidden border border-gray-800/80 bg-[#121722] hover:border-blue-500/80 transition cursor-pointer shadow-2xl flex flex-col justify-between">
+        <div class="p-5">
+          <div class="flex justify-between items-center mb-3">
+            <span class="text-[10px] font-black text-amber-400 bg-amber-950/90 border border-amber-800 px-2 py-0.5 rounded-full">🔥 HOT #2</span>
+            <span class="text-xs text-gray-400"><i class="fa-solid fa-trophy text-amber-500"></i> 레전드</span>
+          </div>
+          <h2 class="text-lg font-black italic tracking-wide group-hover:text-blue-400 transition">축구 역사상 영원한 GOAT는?</h2>
         </div>
-        <div class="h-64 rounded-2xl overflow-hidden relative border border-gray-800">
-          <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=900&q=80" class="w-full h-full object-cover">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-          <div class="absolute bottom-4 left-4"><span class="text-xs text-red-400 font-bold">리버풀</span><h3 class="text-2xl font-black">모하메드 살라</h3></div>
+
+        <div class="grid grid-cols-2 gap-1 p-3 bg-gray-950/50">
+          <div class="h-36 rounded-xl overflow-hidden relative border border-gray-800">
+            <img src="https://images.unsplash.com/photo-1518091043644-c1d4457512c6?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent"></div>
+            <p class="absolute bottom-2 left-2 text-xs font-bold text-white">리오넬 메시</p>
+          </div>
+          <div class="h-36 rounded-xl overflow-hidden relative border border-gray-800">
+            <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent"></div>
+            <p class="absolute bottom-2 left-2 text-xs font-bold text-white">크리스티아누 호날두</p>
+          </div>
+        </div>
+
+        <div class="p-4 border-t border-gray-800/80 flex justify-between items-center text-xs text-gray-400 bg-gray-900/60">
+          <span>메시 VS 호날두</span>
+          <span class="text-blue-400 font-bold group-hover:translate-x-1 transition">투표하기 →</span>
         </div>
       </div>
-    </section>
 
-    <!-- 전체 매치 목록 -->
-    <section>
-      <div class="flex items-center justify-between mb-6">
-        <h2 class="text-2xl font-black italic tracking-wide flex items-center gap-2">
-          <i class="fa-solid fa-bolt text-yellow-500"></i> 진행 중인 매치 토론 목록
-        </h2>
-        <span class="text-xs text-gray-400">원하는 토론 카드를 클릭하여 투표 및 댓글에 참여하세요</span>
+      <!-- HOT 매치 3 -->
+      <div onclick="location.href='detail.html?id=hot_midfield'" class="group relative rounded-2xl overflow-hidden border border-gray-800/80 bg-[#121722] hover:border-blue-500/80 transition cursor-pointer shadow-2xl flex flex-col justify-between">
+        <div class="p-5">
+          <div class="flex justify-between items-center mb-3">
+            <span class="text-[10px] font-black text-amber-400 bg-amber-950/90 border border-amber-800 px-2 py-0.5 rounded-full">🔥 HOT #3</span>
+            <span class="text-xs text-gray-400"><i class="fa-solid fa-award text-blue-500"></i> 미드필더</span>
+          </div>
+          <h2 class="text-lg font-black italic tracking-wide group-hover:text-blue-400 transition">2010년대 최고의 패스 마스터는?</h2>
+        </div>
+
+        <div class="grid grid-cols-2 gap-1 p-3 bg-gray-950/50">
+          <div class="h-36 rounded-xl overflow-hidden relative border border-gray-800">
+            <img src="https://images.unsplash.com/photo-1560272564-669520747490?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent"></div>
+            <p class="absolute bottom-2 left-2 text-xs font-bold text-white">케빈 더 브라위너</p>
+          </div>
+          <div class="h-36 rounded-xl overflow-hidden relative border border-gray-800">
+            <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent"></div>
+            <p class="absolute bottom-2 left-2 text-xs font-bold text-white">루카 모드리치</p>
+          </div>
+        </div>
+
+        <div class="p-4 border-t border-gray-800/80 flex justify-between items-center text-xs text-gray-400 bg-gray-900/60">
+          <span>더 브라위너 VS 모드리치</span>
+          <span class="text-blue-400 font-bold group-hover:translate-x-1 transition">투표하기 →</span>
+        </div>
       </div>
 
-      <div id="match-cards-container" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
-    </section>
+    </div>
   </main>
 
-  <!-- 주제 추가 모달 -->
-  <div id="create-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+  <footer class="border-t border-gray-800/60 py-6 text-center text-xs text-gray-500">
+    © SOLOMON'S. All rights reserved.
+  </footer>
+
+  <!-- 팝업 1: 전체 토론 목록 모달 (상단에 '주제 추가' 버튼 포함) -->
+  <div id="list-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-[#121722] border border-gray-800 rounded-3xl w-full max-w-3xl max-h-[85vh] p-6 shadow-2xl flex flex-col justify-between space-y-4">
+      
+      <!-- 모달 헤더: 상단에 새 토론 주제 추가 버튼 위치 -->
+      <div class="flex justify-between items-center border-b border-gray-800 pb-4">
+        <div>
+          <h3 class="text-xl font-black italic text-white flex items-center gap-2">
+            <i class="fa-solid fa-list-ul text-blue-500"></i> 전체 토론 목록
+          </h3>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="openCreateModal()" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-black px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 shadow-md">
+            <i class="fa-solid fa-plus"></i> 새 토론 주제 추가
+          </button>
+          <button onclick="closeListModal()" class="text-gray-400 hover:text-white text-2xl font-bold ml-2">&times;</button>
+        </div>
+      </div>
+
+      <!-- 토론 목록 스크롤 영역 -->
+      <div id="modal-match-list" class="overflow-y-auto space-y-3 pr-1 max-h-[60vh]"></div>
+
+    </div>
+  </div>
+
+  <!-- 팝업 2: 새 토론 주제 추가 모달 -->
+  <div id="create-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="bg-[#121722] border border-gray-800 rounded-2xl w-full max-w-lg p-6 shadow-2xl space-y-4">
       <div class="flex justify-between items-center border-b border-gray-800 pb-3">
         <h3 class="text-xl font-black italic text-white flex items-center gap-2">
           <i class="fa-solid fa-square-plus text-blue-500"></i> 새 토론 주제 추가
         </h3>
-        <button onclick="closeModal()" class="text-gray-400 hover:text-white text-xl">&times;</button>
+        <button onclick="closeCreateModal()" class="text-gray-400 hover:text-white text-xl">&times;</button>
       </div>
 
       <form onsubmit="handleCreateMatch(event)" class="space-y-4 text-xs">
         <div>
           <label class="block text-gray-400 font-bold mb-1">토론 제목</label>
-          <input type="text" id="modal-title" placeholder="예: GOAT 논쟁 - 메시 vs 호날두" required class="w-full bg-gray-900 border border-gray-700 text-white rounded-xl p-2.5 focus:outline-none focus:border-blue-500">
+          <input type="text" id="modal-title" placeholder="예: 세계 최고 공격수는? 홀란드 vs 음바페" required class="w-full bg-gray-900 border border-gray-700 text-white rounded-xl p-2.5 focus:outline-none focus:border-blue-500">
         </div>
 
         <div class="p-3 bg-blue-950/30 border border-blue-900/50 rounded-xl space-y-2">
           <span class="font-bold text-blue-400 block">선택지 A</span>
           <div class="grid grid-cols-2 gap-2">
-            <input type="text" id="modal-a-name" placeholder="이름 (예: 메시)" required class="bg-gray-900 border border-gray-700 text-white rounded-lg p-2">
-            <input type="text" id="modal-a-team" placeholder="팀 (예: 인터 마이애미)" class="bg-gray-900 border border-gray-700 text-white rounded-lg p-2">
+            <input type="text" id="modal-a-name" placeholder="이름 (예: 엘링 홀란드)" required class="bg-gray-900 border border-gray-700 text-white rounded-lg p-2">
+            <input type="text" id="modal-a-team" placeholder="팀/소속 (예: 맨체스터 시티)" class="bg-gray-900 border border-gray-700 text-white rounded-lg p-2">
           </div>
-          <input type="url" id="modal-a-img" placeholder="이미지 URL (선택)" class="w-full bg-gray-900 border border-gray-700 text-white rounded-lg p-2">
+          <input type="url" id="modal-a-img" placeholder="이미지 URL (선택사항)" class="w-full bg-gray-900 border border-gray-700 text-white rounded-lg p-2">
         </div>
 
         <div class="p-3 bg-red-950/30 border border-red-900/50 rounded-xl space-y-2">
           <span class="font-bold text-red-400 block">선택지 B</span>
           <div class="grid grid-cols-2 gap-2">
-            <input type="text" id="modal-b-name" placeholder="이름 (예: 호날두)" required class="bg-gray-900 border border-gray-700 text-white rounded-lg p-2">
-            <input type="text" id="modal-b-team" placeholder="팀 (예: 알 나스르)" class="bg-gray-900 border border-gray-700 text-white rounded-lg p-2">
+            <input type="text" id="modal-b-name" placeholder="이름 (예: 킬리안 음바페)" required class="bg-gray-900 border border-gray-700 text-white rounded-lg p-2">
+            <input type="text" id="modal-b-team" placeholder="팀/소속 (예: 레알 마드리드)" class="bg-gray-900 border border-gray-700 text-white rounded-lg p-2">
           </div>
-          <input type="url" id="modal-b-img" placeholder="이미지 URL (선택)" class="w-full bg-gray-900 border border-gray-700 text-white rounded-lg p-2">
+          <input type="url" id="modal-b-img" placeholder="이미지 URL (선택사항)" class="w-full bg-gray-900 border border-gray-700 text-white rounded-lg p-2">
         </div>
 
         <div class="flex justify-end gap-2 pt-2 border-t border-gray-800">
-          <button type="button" onclick="closeModal()" class="px-4 py-2 rounded-xl bg-gray-800 text-gray-300 font-bold">취소</button>
-          <button type="submit" class="px-5 py-2 rounded-xl bg-blue-600 text-white font-black">등록하기</button>
+          <button type="button" onclick="closeCreateModal()" class="px-4 py-2 rounded-xl bg-gray-800 text-gray-300 font-bold">취소</button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black transition">등록하기</button>
         </div>
       </form>
     </div>
@@ -130,9 +222,36 @@
 
   <script>
     function escapeHtml(str) { return str ? str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") : ''; }
-    function getCustomMatches() { const saved = localStorage.getItem('custom_matches'); return saved ? JSON.parse(saved) : []; }
-    function openModal() { document.getElementById('create-modal').classList.remove('hidden'); }
-    function closeModal() { document.getElementById('create-modal').classList.add('hidden'); }
+
+    const presetHotMatches = {
+      'hot_goat': {
+        id: 'hot_goat',
+        title: '축구 역사상 영원한 GOAT는?',
+        optionA: { name: '리오넬 메시', team: '인터 마이애미', img: 'https://images.unsplash.com/photo-1518091043644-c1d4457512c6?auto=format&fit=crop&w=600&q=80', votes: 120 },
+        optionB: { name: '크리스티아누 호날두', team: '알 나스르', img: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80', votes: 98 }
+      },
+      'hot_midfield': {
+        id: 'hot_midfield',
+        title: '2010년대 최고의 패스 마스터는?',
+        optionA: { name: '케빈 더 브라위너', team: '맨체스터 시티', img: 'https://images.unsplash.com/photo-1560272564-669520747490?auto=format&fit=crop&w=600&q=80', votes: 85 },
+        optionB: { name: '루카 모드리치', team: '레알 마드리드', img: 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=600&q=80', votes: 77 }
+      }
+    };
+
+    function getCustomMatches() {
+      const saved = localStorage.getItem('custom_matches');
+      return saved ? JSON.parse(saved) : [];
+    }
+
+    // 모달 제어 함수
+    function openListModal() { 
+      renderModalMatches();
+      document.getElementById('list-modal').classList.remove('hidden'); 
+    }
+    function closeListModal() { document.getElementById('list-modal').classList.add('hidden'); }
+
+    function openCreateModal() { document.getElementById('create-modal').classList.remove('hidden'); }
+    function closeCreateModal() { document.getElementById('create-modal').classList.add('hidden'); }
 
     function handleCreateMatch(e) {
       e.preventDefault();
@@ -155,44 +274,41 @@
       list.unshift(newMatch);
       localStorage.setItem('custom_matches', JSON.stringify(list));
 
-      closeModal();
+      closeCreateModal();
       e.target.reset();
-      renderCustomMatches();
+      renderModalMatches(); // 등록 후 목록 갱신
     }
 
-    function renderCustomMatches() {
-      const container = document.getElementById('match-cards-container');
+    function renderModalMatches() {
+      const container = document.getElementById('modal-match-list');
       const list = getCustomMatches();
 
       if (list.length === 0) {
-        container.innerHTML = `<div class="col-span-full border border-dashed border-gray-800 rounded-2xl p-8 text-center text-gray-500"><p class="text-xs">상단의 + 버튼으로 첫 매치를 만들어보세요!</p></div>`;
+        container.innerHTML = `
+          <div class="border border-dashed border-gray-800 rounded-2xl p-8 text-center text-gray-500">
+            <i class="fa-solid fa-folder-open text-2xl mb-2 text-gray-600 block"></i>
+            <p class="text-xs">아직 등록된 추가 토론 매치가 없습니다.<br>상단의 <strong>+ 새 토론 주제 추가</strong> 버튼으로 첫 매치를 등록해보세요!</p>
+          </div>`;
         return;
       }
 
       container.innerHTML = list.map(m => `
-        <div onclick="location.href='detail.html?id=${m.id}'" class="bg-[#121722] border border-gray-800 hover:border-blue-500/80 rounded-2xl p-5 shadow-lg flex flex-col justify-between space-y-4 cursor-pointer transition">
-          <h3 class="text-lg font-black italic text-white">${escapeHtml(m.title)}</h3>
-          <div class="grid grid-cols-2 gap-3">
-            <div class="h-28 rounded-xl overflow-hidden relative">
-              <img src="${escapeHtml(m.optionA.img)}" class="w-full h-full object-cover">
-              <div class="absolute inset-0 bg-black/40"></div>
-              <p class="absolute bottom-2 left-2 text-xs font-bold text-white">${escapeHtml(m.optionA.name)}</p>
-            </div>
-            <div class="h-28 rounded-xl overflow-hidden relative">
-              <img src="${escapeHtml(m.optionB.img)}" class="w-full h-full object-cover">
-              <div class="absolute inset-0 bg-black/40"></div>
-              <p class="absolute bottom-2 left-2 text-xs font-bold text-white">${escapeHtml(m.optionB.name)}</p>
-            </div>
+        <div onclick="location.href='detail.html?id=${m.id}'" class="bg-gray-900/90 border border-gray-800 hover:border-blue-500/80 rounded-2xl p-4 shadow-lg flex items-center justify-between cursor-pointer transition">
+          <div class="space-y-1">
+            <h4 class="text-sm font-black italic text-white">${escapeHtml(m.title)}</h4>
+            <p class="text-xs text-gray-400">${escapeHtml(m.optionA.name)} VS ${escapeHtml(m.optionB.name)}</p>
           </div>
-          <div class="flex justify-between items-center text-xs text-blue-400 font-bold border-t border-gray-800/80 pt-2">
-            <span>총 ${m.optionA.votes + m.optionB.votes}명 참여 중</span>
-            <span>입장하여 투표하기 →</span>
+          <div class="flex items-center gap-3">
+            <span class="text-xs text-blue-400 font-bold bg-blue-950/60 px-3 py-1 rounded-full border border-blue-900">
+              총 ${(m.optionA.votes || 0) + (m.optionB.votes || 0)}명
+            </span>
+            <span class="text-xs text-gray-300 font-bold">입장 →</span>
           </div>
         </div>
       `).join('');
     }
 
-    renderCustomMatches();
+    localStorage.setItem('preset_matches', JSON.stringify(presetHotMatches));
   </script>
 </body>
 </html>
