@@ -5,245 +5,185 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SOLOMON'S - 상세 토론</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: { brand: '#3B82F6', accent: '#EF4444', darkbg: '#0A0D14', cardbg: '#121722' },
-          fontFamily: { sports: ['Oswald', 'Noto Sans KR', 'sans-serif'], sans: ['Noto Sans KR', 'sans-serif'] }
-        }
-      }
-    }
-  </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-[#0A0D14] text-gray-100 min-h-screen font-sans antialiased flex flex-col justify-between">
+<body id="page-body" class="bg-[#0A0D14] text-gray-100 min-h-screen font-sans antialiased flex flex-col justify-between transition-colors duration-500">
 
-  <!-- 헤더 -->
-  <header class="sticky top-0 z-40 backdrop-blur-md bg-[#0A0D14]/90 border-b border-gray-800/80">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+  <header id="main-header" class="sticky top-0 z-40 backdrop-blur-md bg-[#0A0D14]/90 border-b border-gray-800/80 transition-colors duration-500">
+    <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3 cursor-pointer" onclick="location.href='index.html'">
-        <span class="font-sports-title text-3xl font-black italic tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-indigo-400 to-red-500 uppercase">
+        <span class="font-black italic tracking-widest text-3xl text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-indigo-400 to-red-500 uppercase">
           SOLOMON'S
         </span>
       </div>
-      <button onclick="location.href='index.html'" class="bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-bold px-3.5 py-2 rounded-xl transition flex items-center gap-1.5">
-        <i class="fa-solid fa-arrow-left"></i> 목록으로 돌아가기
+      <button onclick="location.href='list.html'" class="bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-bold px-3.5 py-2 rounded-xl transition flex items-center gap-1.5">
+        <i class="fa-solid fa-arrow-left"></i> 목록으로
       </button>
     </div>
   </header>
 
-  <!-- 상세 내용 메인 -->
-  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full space-y-6">
+  <main class="max-w-4xl mx-auto px-4 py-8 w-full space-y-6">
     <div class="bg-[#121722] border border-gray-800/80 rounded-3xl p-6 shadow-2xl space-y-6">
       
-      <!-- 상단 헤더 정보 -->
-      <div class="flex justify-between items-center border-b border-gray-800/80 pb-4">
-        <div>
-          <span class="text-xs font-black text-blue-400 bg-blue-950/80 border border-blue-800 px-3 py-1 rounded-full inline-flex items-center gap-1">
-            <i class="fa-solid fa-scale-balanced"></i> 토론 매치
-          </span>
-          <h1 id="match-title" class="text-2xl md:text-3xl font-black italic mt-2 text-white">토론 주제 불러오는 중...</h1>
+      <!-- 제목 및 고려사항 영역 -->
+      <div class="border-b border-gray-800 pb-4 space-y-2">
+        <div class="flex justify-between items-start">
+          <div>
+            <span class="text-[10px] font-black text-blue-400 bg-blue-950/80 border border-blue-800 px-3 py-1 rounded-full">
+              <i class="fa-solid fa-scale-balanced"></i> 실시간 토론
+            </span>
+            <h1 id="match-title" class="text-2xl md:text-3xl font-black italic mt-2 text-white">토론 불러오는 중...</h1>
+          </div>
+          <span class="text-xs text-gray-400 shrink-0">총 <strong id="total-votes" class="text-white">0</strong>표</span>
         </div>
-        <div class="text-right">
-          <span class="text-xs text-gray-400">총 투표수: <strong id="total-votes" class="text-white">0</strong>표</span>
+        <div id="description-box" class="hidden bg-amber-950/30 border border-amber-800/50 p-3 rounded-xl text-xs text-amber-300">
+          <i class="fa-solid fa-circle-info mr-1"></i> <strong class="font-bold">고려사항:</strong> <span id="match-desc"></span>
         </div>
       </div>
 
-      <!-- 양자대결 카운트 및 선택지 -->
+      <!-- 선택지 매치 카드 -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative">
-        
-        <!-- VS 배지 -->
-        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 hidden md:flex w-10 h-10 bg-amber-500 rounded-full border-4 border-[#121722] items-center justify-center shadow-lg">
-          <span class="font-black italic text-black text-xs">VS</span>
-        </div>
-
-        <!-- 옵션 A 카드 -->
-        <div class="bg-gray-900/90 border border-blue-900/40 rounded-2xl p-5 flex flex-col justify-between space-y-4">
-          <div class="relative group">
-            <div id="img-container-a" class="h-56 md:h-64 rounded-xl overflow-hidden bg-gradient-to-br from-blue-950/40 to-gray-950 flex items-center justify-center border border-gray-800">
-            </div>
-            <!-- 사진 변경 버튼 -->
+        <!-- 옵션 A -->
+        <div id="card-a" class="bg-gray-900/90 border rounded-2xl p-5 flex flex-col justify-between space-y-4 transition">
+          <div>
+            <!-- 사진 잘림 방지: object-contain -->
+            <div id="img-container-a" class="h-56 rounded-xl bg-gray-950 flex items-center justify-center border border-gray-800 overflow-hidden"></div>
             <input type="file" id="file-a" accept="image/*" class="hidden" onchange="uploadImage(event, 'a')">
-            <button onclick="document.getElementById('file-a').click()" class="mt-2 w-full bg-blue-950/80 hover:bg-blue-900 text-blue-300 border border-blue-800/80 text-xs font-bold py-1.5 px-3 rounded-lg transition flex items-center justify-center gap-1.5">
-              <i class="fa-solid fa-camera"></i> 사진 업로드 / 변경
+            <button onclick="document.getElementById('file-a').click()" class="mt-2 w-full bg-gray-800 hover:bg-gray-700 text-gray-300 text-[11px] font-bold py-1.5 rounded-lg border border-gray-700">
+              <i class="fa-solid fa-camera"></i> 사진 업로드
             </button>
           </div>
 
           <div class="space-y-1">
-            <span id="team-a" class="text-xs font-bold text-blue-400">소속팀</span>
-            <h3 id="name-a" class="text-xl font-black text-white">이름</h3>
+            <span id="team-a" class="text-xs font-bold text-gray-400">팀</span>
+            <h3 id="name-a" class="text-xl font-black text-white">A</h3>
           </div>
 
           <div class="flex items-center justify-between border-t border-gray-800 pt-3">
             <div>
-              <span id="percent-a" class="text-2xl font-black text-blue-400">0%</span>
+              <span id="percent-a" class="text-2xl font-black">0%</span>
               <p id="votes-a" class="text-xs text-gray-400">0표</p>
             </div>
-            <button onclick="vote('a')" id="btn-vote-a" class="bg-blue-600 hover:bg-blue-500 text-white font-black text-xs px-5 py-2.5 rounded-xl transition shadow-lg shadow-blue-500/20">
+            <button onclick="vote('a')" id="btn-vote-a" class="text-white font-black text-xs px-5 py-2.5 rounded-xl transition shadow-lg">
               투표하기
             </button>
           </div>
         </div>
 
-        <!-- 옵션 B 카드 -->
-        <div class="bg-gray-900/90 border border-red-900/40 rounded-2xl p-5 flex flex-col justify-between space-y-4">
-          <div class="relative group">
-            <div id="img-container-b" class="h-56 md:h-64 rounded-xl overflow-hidden bg-gradient-to-br from-red-950/40 to-gray-950 flex items-center justify-center border border-gray-800">
-            </div>
-            <!-- 사진 변경 버튼 -->
+        <!-- 옵션 B -->
+        <div id="card-b" class="bg-gray-900/90 border rounded-2xl p-5 flex flex-col justify-between space-y-4 transition">
+          <div>
+            <!-- 사진 잘림 방지: object-contain -->
+            <div id="img-container-b" class="h-56 rounded-xl bg-gray-950 flex items-center justify-center border border-gray-800 overflow-hidden"></div>
             <input type="file" id="file-b" accept="image/*" class="hidden" onchange="uploadImage(event, 'b')">
-            <button onclick="document.getElementById('file-b').click()" class="mt-2 w-full bg-red-950/80 hover:bg-red-900 text-red-300 border border-red-800/80 text-xs font-bold py-1.5 px-3 rounded-lg transition flex items-center justify-center gap-1.5">
-              <i class="fa-solid fa-camera"></i> 사진 업로드 / 변경
+            <button onclick="document.getElementById('file-b').click()" class="mt-2 w-full bg-gray-800 hover:bg-gray-700 text-gray-300 text-[11px] font-bold py-1.5 rounded-lg border border-gray-700">
+              <i class="fa-solid fa-camera"></i> 사진 업로드
             </button>
           </div>
 
           <div class="space-y-1">
-            <span id="team-b" class="text-xs font-bold text-red-400">소속팀</span>
-            <h3 id="name-b" class="text-xl font-black text-white">이름</h3>
+            <span id="team-b" class="text-xs font-bold text-gray-400">팀</span>
+            <h3 id="name-b" class="text-xl font-black text-white">B</h3>
           </div>
 
           <div class="flex items-center justify-between border-t border-gray-800 pt-3">
             <div>
-              <span id="percent-b" class="text-2xl font-black text-red-400">0%</span>
+              <span id="percent-b" class="text-2xl font-black">0%</span>
               <p id="votes-b" class="text-xs text-gray-400">0표</p>
             </div>
-            <button onclick="vote('b')" id="btn-vote-b" class="bg-red-600 hover:bg-red-500 text-white font-black text-xs px-5 py-2.5 rounded-xl transition shadow-lg shadow-red-500/20">
+            <button onclick="vote('b')" id="btn-vote-b" class="text-white font-black text-xs px-5 py-2.5 rounded-xl transition shadow-lg">
               투표하기
             </button>
           </div>
         </div>
-
       </div>
 
-      <!-- 투표 진행바 -->
+      <!-- 게이지 바 -->
       <div class="w-full bg-gray-900 rounded-full h-3 overflow-hidden flex border border-gray-800">
-        <div id="bar-a" class="bg-blue-500 h-full transition-all duration-500" style="width: 50%"></div>
-        <div id="bar-b" class="bg-red-500 h-full transition-all duration-500" style="width: 50%"></div>
+        <div id="bar-a" class="h-full transition-all duration-500"></div>
+        <div id="bar-b" class="h-full transition-all duration-500"></div>
       </div>
+    </div>
 
+    <!-- 댓글 영역 (서브페이지 통일 & 픽 연동 & 수정 지원) -->
+    <div class="bg-[#121722] border border-gray-800/80 rounded-3xl p-6 shadow-2xl space-y-4">
+      <h3 class="text-lg font-black italic text-white flex items-center gap-2">
+        <i class="fa-solid fa-comments text-blue-500"></i> 실시간 토론 댓글
+      </h3>
+
+      <form onsubmit="postComment(event)" class="space-y-3">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          <input type="text" id="comment-author" placeholder="닉네임" required class="bg-gray-900 border border-gray-700 text-white rounded-xl p-2.5 text-xs focus:outline-none">
+          <input type="text" id="comment-content" placeholder="의견을 남겨주세요..." required class="sm:col-span-2 bg-gray-900 border border-gray-700 text-white rounded-xl p-2.5 text-xs focus:outline-none">
+        </div>
+        <div class="flex justify-between items-center">
+          <span id="my-pick-indicator" class="text-xs text-gray-400 font-bold">내 픽: 미투표</span>
+          <button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-black px-6 py-2.5 rounded-xl transition">댓글 등록</button>
+        </div>
+      </form>
+
+      <div id="comments-list" class="space-y-3 pt-2"></div>
     </div>
   </main>
 
   <script>
+    function escapeHtml(str) { return str ? str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") : ''; }
+
     const urlParams = new URLSearchParams(window.location.search);
     const matchId = urlParams.get('id') || 'main';
-
-    const mainMatch = {
-      id: 'main',
-      title: '2020년대 최고의 프리미어리그 윙어는?',
-      optionA: { name: '손흥민', team: '토트넘 홋스퍼', img: '', votes: 9 },
-      optionB: { name: '모하메드 살라', team: '리버풀 FC', img: '', votes: 2 }
-    };
-
     let currentMatch = null;
 
-    function loadMatch() {
-      if (matchId === 'main') {
-        const savedMain = localStorage.getItem('main_match_data');
-        currentMatch = savedMain ? JSON.parse(savedMain) : mainMatch;
-      } else {
-        const customMatches = JSON.parse(localStorage.getItem('custom_matches') || '[]');
-        currentMatch = customMatches.find(m => m.id === matchId);
-      }
+    function getMyPick() { return localStorage.getItem(`voted_${matchId}`); }
 
-      if (!currentMatch) {
-        alert("존재하지 않거나 삭제된 토론 주제입니다.");
-        location.href = 'index.html';
-        return;
-      }
+    async function loadMatch() {
+      const res = await fetch(`/api/poll?id=${matchId}`);
+      currentMatch = await res.json();
+      if (!currentMatch.id) return location.href = 'index.html';
 
       render();
-    }
-
-    function saveMatchData() {
-      if (matchId === 'main') {
-        localStorage.setItem('main_match_data', JSON.stringify(currentMatch));
-      } else {
-        const customMatches = JSON.parse(localStorage.getItem('custom_matches') || '[]');
-        const idx = customMatches.findIndex(m => m.id === matchId);
-        if (idx !== -1) {
-          customMatches[idx] = currentMatch;
-          localStorage.setItem('custom_matches', JSON.stringify(customMatches));
-        }
-      }
-    }
-
-    function uploadImage(e, type) {
-      const file = e.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = function(evt) {
-        const img = new Image();
-        img.onload = function() {
-          const canvas = document.createElement('canvas');
-          let width = img.width;
-          let height = img.height;
-          const maxDim = 600;
-
-          if (width > maxDim || height > maxDim) {
-            if (width > height) {
-              height = Math.round((height * maxDim) / width);
-              width = maxDim;
-            } else {
-              width = Math.round((width * maxDim) / height);
-              height = maxDim;
-            }
-          }
-
-          canvas.width = width;
-          canvas.height = height;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, width, height);
-
-          const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
-
-          if (type === 'a') {
-            currentMatch.optionA.img = compressedBase64;
-          } else {
-            currentMatch.optionB.img = compressedBase64;
-          }
-
-          try {
-            saveMatchData();
-            render();
-          } catch (err) {
-            alert("이미지 저장 용량이 초과되었습니다.");
-          }
-        };
-        img.src = evt.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-
-    function renderImg(containerId, imgUrl, defaultIconClass, colorClass) {
-      const container = document.getElementById(containerId);
-      if (imgUrl && imgUrl.trim() !== '') {
-        container.innerHTML = `<img src="${imgUrl}" class="w-full h-full object-cover">`;
-      } else {
-        container.innerHTML = `<i class="${defaultIconClass} text-5xl ${colorClass} opacity-60"></i>`;
-      }
+      applyMyPickTheme();
+      loadComments();
     }
 
     function render() {
-      document.getElementById('match-title').innerText = currentMatch.title;
-      
-      document.getElementById('name-a').innerText = currentMatch.optionA.name;
-      document.getElementById('team-a').innerText = currentMatch.optionA.team || '';
-      document.getElementById('votes-a').innerText = `${currentMatch.optionA.votes || 0}표`;
-      renderImg('img-container-a', currentMatch.optionA.img, 'fa-solid fa-user-ninja', 'text-blue-400');
+      const m = currentMatch;
+      const colorA = m.option_a_color || '#3B82F6';
+      const colorB = m.option_b_color || '#EF4444';
 
-      document.getElementById('name-b').innerText = currentMatch.optionB.name;
-      document.getElementById('team-b').innerText = currentMatch.optionB.team || '';
-      document.getElementById('votes-b').innerText = `${currentMatch.optionB.votes || 0}표`;
-      renderImg('img-container-b', currentMatch.optionB.img, 'fa-solid fa-user-ninja', 'text-red-400');
+      document.getElementById('match-title').innerText = m.title;
 
-      const vA = currentMatch.optionA.votes || 0;
-      const vB = currentMatch.optionB.votes || 0;
+      if (m.description) {
+        document.getElementById('match-desc').innerText = m.description;
+        document.getElementById('description-box').classList.remove('hidden');
+      }
+
+      document.getElementById('name-a').innerText = m.option_a_name;
+      document.getElementById('team-a').innerText = m.option_a_team || '';
+      document.getElementById('votes-a').innerText = `${m.option_a_votes || 0}표`;
+      document.getElementById('percent-a').style.color = colorA;
+      document.getElementById('btn-vote-a').style.backgroundColor = colorA;
+      document.getElementById('card-a').style.borderColor = `${colorA}40`;
+
+      // 잘림 방지 (object-contain)
+      document.getElementById('img-container-a').innerHTML = m.option_a_img 
+        ? `<img src="${m.option_a_img}" class="w-full h-full object-contain p-2">` 
+        : `<i class="fa-solid fa-user-ninja text-4xl opacity-50"></i>`;
+
+      document.getElementById('name-b').innerText = m.option_b_name;
+      document.getElementById('team-b').innerText = m.option_b_team || '';
+      document.getElementById('votes-b').innerText = `${m.option_b_votes || 0}표`;
+      document.getElementById('percent-b').style.color = colorB;
+      document.getElementById('btn-vote-b').style.backgroundColor = colorB;
+      document.getElementById('card-b').style.borderColor = `${colorB}40`;
+
+      document.getElementById('img-container-b').innerHTML = m.option_b_img 
+        ? `<img src="${m.option_b_img}" class="w-full h-full object-contain p-2">` 
+        : `<i class="fa-solid fa-user-ninja text-4xl opacity-50"></i>`;
+
+      const vA = m.option_a_votes || 0;
+      const vB = m.option_b_votes || 0;
       const total = vA + vB;
-
       document.getElementById('total-votes').innerText = total;
 
       let pA = 50, pB = 50;
@@ -255,15 +195,137 @@
       document.getElementById('percent-a').innerText = `${pA}%`;
       document.getElementById('percent-b').innerText = `${pB}%`;
       document.getElementById('bar-a').style.width = `${pA}%`;
+      document.getElementById('bar-a').style.backgroundColor = colorA;
       document.getElementById('bar-b').style.width = `${pB}%`;
+      document.getElementById('bar-b').style.backgroundColor = colorB;
     }
 
-    function vote(type) {
-      if (type === 'a') currentMatch.optionA.votes++;
-      else currentMatch.optionB.votes++;
+    // 투표 & 중복 투표 방지
+    async function vote(type) {
+      if (getMyPick()) {
+        alert("이미 투표에 참여하셨습니다!");
+        return;
+      }
 
-      saveMatchData();
-      render();
+      await fetch('/api/poll', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'vote', id: matchId, option: type })
+      });
+
+      localStorage.setItem(`voted_${matchId}`, type);
+      loadMatch();
+    }
+
+    // 내 픽 테마 적용
+    function applyMyPickTheme() {
+      const myPick = getMyPick();
+      const myPickTxt = document.getElementById('my-pick-indicator');
+
+      if (!myPick) {
+        myPickTxt.innerText = "내 픽: 아직 투표하지 않음";
+        return;
+      }
+
+      const isA = myPick === 'a';
+      const pickName = isA ? currentMatch.option_a_name : currentMatch.option_b_name;
+      const pickColor = isA ? (currentMatch.option_a_color || '#3B82F6') : (currentMatch.option_b_color || '#EF4444');
+
+      myPickTxt.innerHTML = `내 픽: <strong style="color:${pickColor}">${pickName}</strong>`;
+      document.getElementById('main-header').style.borderBottomColor = pickColor;
+    }
+
+    async function uploadImage(e, type) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await fetch('/api/upload', { method: 'POST', body: formData });
+      const data = await res.json();
+      if (data.url) {
+        await fetch('/api/poll', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'update_img', id: matchId, option: type, img: data.url })
+        });
+        loadMatch();
+      }
+    }
+
+    // 댓글 기능 (픽 연동 테마 & 수정 지원)
+    async function loadComments() {
+      const res = await fetch(`/api/comments?page_id=${matchId}`);
+      const comments = await res.json();
+
+      if (!comments || comments.length === 0) {
+        document.getElementById('comments-list').innerHTML = '<p class="text-xs text-gray-500 text-center py-4">첫 댓글을 남겨보세요!</p>';
+        return;
+      }
+
+      const myAuthor = localStorage.getItem('my_nickname') || '';
+
+      const html = comments.map(c => {
+        let borderColor = '#374151';
+        let badge = '<span class="text-[10px] text-gray-400 bg-gray-800 px-2 py-0.5 rounded">중립</span>';
+
+        if (c.pick === 'a') {
+          const color = currentMatch.option_a_color || '#3B82F6';
+          borderColor = color;
+          badge = `<span class="text-[10px] font-bold px-2 py-0.5 rounded" style="background-color:${color}20; color:${color}">${currentMatch.option_a_name} 픽</span>`;
+        } else if (c.pick === 'b') {
+          const color = currentMatch.option_b_color || '#EF4444';
+          borderColor = color;
+          badge = `<span class="text-[10px] font-bold px-2 py-0.5 rounded" style="background-color:${color}20; color:${color}">${currentMatch.option_b_name} 픽</span>`;
+        }
+
+        const isMyComment = myAuthor && myAuthor === c.author;
+
+        return `
+          <div class="bg-gray-900 border-l-4 rounded-xl p-3 text-xs space-y-1 relative" style="border-left-color: ${borderColor}">
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <strong class="text-white">${escapeHtml(c.author)}</strong>
+                ${badge}
+              </div>
+              ${isMyComment ? `<button onclick="editComment(${c.id}, '${escapeHtml(c.content)}')" class="text-[10px] text-gray-400 hover:text-white underline">수정</button>` : ''}
+            </div>
+            <p id="comment-text-${c.id}" class="text-gray-300">${escapeHtml(c.content)}</p>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('comments-list').innerHTML = html;
+    }
+
+    async function postComment(e) {
+      e.preventDefault();
+      const author = document.getElementById('comment-author').value.trim();
+      const content = document.getElementById('comment-content').value.trim();
+      const pick = getMyPick() || 'none';
+
+      localStorage.setItem('my_nickname', author);
+
+      await fetch('/api/comments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ page_id: matchId, author, content, pick })
+      });
+
+      document.getElementById('comment-content').value = '';
+      loadComments();
+    }
+
+    async function editComment(commentId, oldContent) {
+      const newContent = prompt("댓글을 수정하세요:", oldContent);
+      if (!newContent || newContent.trim() === '') return;
+
+      await fetch('/api/comments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'edit', comment_id: commentId, content: newContent.trim() })
+      });
+
+      loadComments();
     }
 
     document.addEventListener('DOMContentLoaded', loadMatch);
