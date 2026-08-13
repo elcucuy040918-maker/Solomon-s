@@ -7,8 +7,41 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    /* 왼쪽 카드가 왼쪽 외부에서 중앙으로 이동 */
+    .animate-slide-left {
+      animation: slideInFromLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* 오른쪽 카드가 오른쪽 외부에서 중앙으로 이동 */
+    .animate-slide-right {
+      animation: slideInFromRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideInFromLeft {
+      0% {
+        opacity: 0;
+        transform: translateX(-120px) scale(0.85);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
+    }
+
+    @keyframes slideInFromRight {
+      0% {
+        opacity: 0;
+        transform: translateX(120px) scale(0.85);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
+    }
+  </style>
 </head>
-<body id="page-body" class="bg-[#0A0D14] text-gray-100 min-h-screen font-sans antialiased flex flex-col justify-between transition-colors duration-500">
+<body id="page-body" class="bg-[#0A0D14] text-gray-100 min-h-screen font-sans antialiased flex flex-col justify-between transition-colors duration-500 overflow-x-hidden">
 
   <header id="main-header" class="sticky top-0 z-40 backdrop-blur-md bg-[#0A0D14]/90 border-b border-gray-800/80 transition-colors duration-500">
     <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
@@ -24,7 +57,7 @@
   </header>
 
   <main class="max-w-4xl mx-auto px-4 py-8 w-full space-y-6">
-    <div class="bg-[#121722] border border-gray-800/80 rounded-3xl p-6 shadow-2xl space-y-6">
+    <div class="bg-[#121722] border border-gray-800/80 rounded-3xl p-6 shadow-2xl space-y-6 overflow-hidden">
       
       <!-- 제목 및 고려사항 영역 -->
       <div class="border-b border-gray-800 pb-4 space-y-2">
@@ -42,12 +75,11 @@
         </div>
       </div>
 
-      <!-- 선택지 매치 카드 -->
+      <!-- 선택지 매치 카드 (양옆에서 중앙으로 이동하는 애니메이션 적용) -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative">
-        <!-- 옵션 A -->
-        <div id="card-a" class="bg-gray-900/90 border rounded-2xl p-5 flex flex-col justify-between space-y-4 transition">
+        <!-- 옵션 A (왼쪽에서 중앙으로 슬라이드) -->
+        <div id="card-a" class="animate-slide-left bg-gray-900/90 border rounded-2xl p-5 flex flex-col justify-between space-y-4 transition">
           <div>
-            <!-- 사진 잘림 방지: object-contain -->
             <div id="img-container-a" class="h-56 rounded-xl bg-gray-950 flex items-center justify-center border border-gray-800 overflow-hidden"></div>
             <input type="file" id="file-a" accept="image/*" class="hidden" onchange="uploadImage(event, 'a')">
             <button onclick="document.getElementById('file-a').click()" class="mt-2 w-full bg-gray-800 hover:bg-gray-700 text-gray-300 text-[11px] font-bold py-1.5 rounded-lg border border-gray-700">
@@ -71,10 +103,9 @@
           </div>
         </div>
 
-        <!-- 옵션 B -->
-        <div id="card-b" class="bg-gray-900/90 border rounded-2xl p-5 flex flex-col justify-between space-y-4 transition">
+        <!-- 옵션 B (오른쪽에서 중앙으로 슬라이드) -->
+        <div id="card-b" class="animate-slide-right bg-gray-900/90 border rounded-2xl p-5 flex flex-col justify-between space-y-4 transition">
           <div>
-            <!-- 사진 잘림 방지: object-contain -->
             <div id="img-container-b" class="h-56 rounded-xl bg-gray-950 flex items-center justify-center border border-gray-800 overflow-hidden"></div>
             <input type="file" id="file-b" accept="image/*" class="hidden" onchange="uploadImage(event, 'b')">
             <button onclick="document.getElementById('file-b').click()" class="mt-2 w-full bg-gray-800 hover:bg-gray-700 text-gray-300 text-[11px] font-bold py-1.5 rounded-lg border border-gray-700">
@@ -106,7 +137,7 @@
       </div>
     </div>
 
-    <!-- 댓글 영역 (서브페이지 통일 & 픽 연동 & 수정 지원) -->
+    <!-- 댓글 영역 -->
     <div class="bg-[#121722] border border-gray-800/80 rounded-3xl p-6 shadow-2xl space-y-4">
       <h3 class="text-lg font-black italic text-white flex items-center gap-2">
         <i class="fa-solid fa-comments text-blue-500"></i> 실시간 토론 댓글
@@ -165,7 +196,6 @@
       document.getElementById('btn-vote-a').style.backgroundColor = colorA;
       document.getElementById('card-a').style.borderColor = `${colorA}40`;
 
-      // 잘림 방지 (object-contain)
       document.getElementById('img-container-a').innerHTML = m.option_a_img 
         ? `<img src="${m.option_a_img}" class="w-full h-full object-contain p-2">` 
         : `<i class="fa-solid fa-user-ninja text-4xl opacity-50"></i>`;
@@ -200,7 +230,6 @@
       document.getElementById('bar-b').style.backgroundColor = colorB;
     }
 
-    // 투표 & 중복 투표 방지
     async function vote(type) {
       if (getMyPick()) {
         alert("이미 투표에 참여하셨습니다!");
@@ -217,7 +246,6 @@
       loadMatch();
     }
 
-    // 내 픽 테마 적용
     function applyMyPickTheme() {
       const myPick = getMyPick();
       const myPickTxt = document.getElementById('my-pick-indicator');
@@ -252,7 +280,6 @@
       }
     }
 
-    // 댓글 기능 (픽 연동 테마 & 수정 지원)
     async function loadComments() {
       const res = await fetch(`/api/comments?page_id=${matchId}`);
       const comments = await res.json();
