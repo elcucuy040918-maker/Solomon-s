@@ -17,19 +17,6 @@
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Noto Sans KR', sans-serif; }
-    .font-sports-title { font-family: 'Oswald', 'Noto Sans KR', sans-serif; }
-    .reveal-card {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.6s ease-out;
-    }
-    .reveal-card.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  </style>
 </head>
 <body class="bg-[#0A0D14] text-gray-100 min-h-screen font-sans antialiased flex flex-col justify-between">
 
@@ -41,126 +28,40 @@
           SOLOMON'S
         </span>
         <span class="bg-red-500/20 text-red-400 text-xs font-black px-2.5 py-0.5 rounded-full border border-red-500/40 animate-pulse tracking-wider hidden sm:inline-block">
-          HOT DEBATE
+          TOP 3
         </span>
       </div>
       
+      <!-- 전체 토론 보기 버튼 -> list.html 이동 -->
       <div>
-        <button onclick="openListModal()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-black px-4 py-2.5 rounded-xl border border-blue-400/30 transition flex items-center gap-2 shadow-lg shadow-blue-500/20">
+        <button onclick="location.href='list.html'" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-black px-4 py-2.5 rounded-xl border border-blue-400/30 transition flex items-center gap-2 shadow-lg shadow-blue-500/20">
           <i class="fa-solid fa-list-ul"></i> 전체 토론 보기
         </button>
       </div>
     </div>
   </header>
 
-  <!-- 메인 토론 영역 -->
+  <!-- 메인 TOP 3 토론 영역 -->
   <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full space-y-8">
     <div class="flex items-center justify-between mb-4">
       <div>
         <span class="text-xs font-black uppercase tracking-widest text-red-400 bg-red-950/80 px-3 py-1 rounded-full border border-red-800/60 inline-flex items-center gap-1.5">
-          <i class="fa-solid fa-fire"></i> REALTIME HOT ISSUE
+          <i class="fa-solid fa-fire"></i> REALTIME HOT TOP 3
         </span>
-        <h1 class="text-2xl md:text-3xl font-black mt-2 tracking-tight italic">메인 토론 매치</h1>
+        <h1 class="text-2xl md:text-3xl font-black mt-2 tracking-tight italic">인기 토론 TOP 3</h1>
       </div>
     </div>
 
-    <!-- 메인 토론 카드는 JS로 동적 렌더링 -->
-    <div id="main-match-container" class="space-y-6"></div>
+    <!-- TOP 3 카드가 들어갈 컨테이너 -->
+    <div id="top3-container" class="space-y-6"></div>
   </main>
 
   <footer class="border-t border-gray-800/60 py-8 text-center text-xs text-gray-500">
     © SOLOMON'S. All rights reserved.
   </footer>
 
-  <!-- 팝업 1: 전체 토론 목록 모달 -->
-  <div id="list-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-[#121722] border border-gray-800 rounded-3xl w-full max-w-3xl max-h-[85vh] p-6 shadow-2xl flex flex-col justify-between space-y-4">
-      <div class="flex justify-between items-center border-b border-gray-800 pb-4">
-        <h3 class="text-xl font-black italic text-white flex items-center gap-2">
-          <i class="fa-solid fa-list-ul text-blue-500"></i> 전체 토론 목록
-        </h3>
-        <div class="flex items-center gap-3">
-          <button onclick="openCreateModal()" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-black px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 shadow-md">
-            <i class="fa-solid fa-plus"></i> 새 토론 주제 추가
-          </button>
-          <button onclick="closeListModal()" class="text-gray-400 hover:text-white text-2xl font-bold ml-2">&times;</button>
-        </div>
-      </div>
-      <div id="modal-match-list" class="overflow-y-auto space-y-3 pr-1 max-h-[60vh]"></div>
-    </div>
-  </div>
-
-  <!-- 팝업 2: 새 토론 주제 추가 모달 -->
-  <div id="create-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-[#121722] border border-gray-800 rounded-2xl w-full max-w-lg p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
-      <div class="flex justify-between items-center border-b border-gray-800 pb-3">
-        <h3 class="text-xl font-black italic text-white flex items-center gap-2">
-          <i class="fa-solid fa-square-plus text-blue-500"></i> 새 토론 주제 추가
-        </h3>
-        <button onclick="closeCreateModal()" class="text-gray-400 hover:text-white text-xl">&times;</button>
-      </div>
-
-      <form onsubmit="handleCreateMatch(event)" class="space-y-4 text-xs">
-        <div>
-          <label class="block text-gray-400 font-bold mb-1">토론 제목</label>
-          <input type="text" id="modal-title" placeholder="예: 세계 최고 공격수는? 홀란드 vs 음바페" required class="w-full bg-gray-900 border border-gray-700 text-white rounded-xl p-2.5 focus:outline-none focus:border-blue-500">
-        </div>
-
-        <div class="p-3 bg-blue-950/30 border border-blue-900/50 rounded-xl space-y-2">
-          <span class="font-bold text-blue-400 block">선택지 A</span>
-          <div class="grid grid-cols-2 gap-2">
-            <input type="text" id="modal-a-name" placeholder="이름 (예: 엘링 홀란드)" required class="bg-gray-900 border border-gray-700 text-white rounded-lg p-2">
-            <input type="text" id="modal-a-team" placeholder="팀/소속 (예: 맨체스터 시티)" class="bg-gray-900 border border-gray-700 text-white rounded-lg p-2">
-          </div>
-          <div class="space-y-1">
-            <label class="block text-gray-400 text-[11px] font-bold">이미지 등록 (선택)</label>
-            <div class="flex gap-2">
-              <input type="file" id="modal-a-file" accept="image/*" onchange="handleFileSelect(event, 'a')" class="hidden">
-              <button type="button" onclick="document.getElementById('modal-a-file').click()" class="bg-blue-900/80 hover:bg-blue-800 text-blue-200 px-3 py-1.5 rounded-lg border border-blue-700 font-bold flex items-center gap-1.5 shrink-0">
-                <i class="fa-solid fa-upload"></i> 파일 업로드
-              </button>
-              <input type="url" id="modal-a-img" placeholder="또는 이미지 URL 직접 입력" class="w-full bg-gray-900 border border-gray-700 text-white rounded-lg p-1.5">
-            </div>
-            <div id="preview-a-container" class="hidden mt-2 relative w-20 h-20 rounded-lg overflow-hidden border border-blue-500/50">
-              <img id="preview-a" class="w-full h-full object-cover">
-            </div>
-          </div>
-        </div>
-
-        <div class="p-3 bg-red-950/30 border border-red-900/50 rounded-xl space-y-2">
-          <span class="font-bold text-red-400 block">선택지 B</span>
-          <div class="grid grid-cols-2 gap-2">
-            <input type="text" id="modal-b-name" placeholder="이름 (예: 킬리안 음바페)" required class="bg-gray-900 border border-gray-700 text-white rounded-lg p-2">
-            <input type="text" id="modal-b-team" placeholder="팀/소속 (예: 레알 마드리드)" class="bg-gray-900 border border-gray-700 text-white rounded-lg p-2">
-          </div>
-          <div class="space-y-1">
-            <label class="block text-gray-400 text-[11px] font-bold">이미지 등록 (선택)</label>
-            <div class="flex gap-2">
-              <input type="file" id="modal-b-file" accept="image/*" onchange="handleFileSelect(event, 'b')" class="hidden">
-              <button type="button" onclick="document.getElementById('modal-b-file').click()" class="bg-red-900/80 hover:bg-red-800 text-red-200 px-3 py-1.5 rounded-lg border border-red-700 font-bold flex items-center gap-1.5 shrink-0">
-                <i class="fa-solid fa-upload"></i> 파일 업로드
-              </button>
-              <input type="url" id="modal-b-img" placeholder="또는 이미지 URL 직접 입력" class="w-full bg-gray-900 border border-gray-700 text-white rounded-lg p-1.5">
-            </div>
-            <div id="preview-b-container" class="hidden mt-2 relative w-20 h-20 rounded-lg overflow-hidden border border-red-500/50">
-              <img id="preview-b" class="w-full h-full object-cover">
-            </div>
-          </div>
-        </div>
-
-        <div class="flex justify-end gap-2 pt-2 border-t border-gray-800">
-          <button type="button" onclick="closeCreateModal()" class="px-4 py-2 rounded-xl bg-gray-800 text-gray-300 font-bold">취소</button>
-          <button type="submit" class="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black transition">등록하기</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
   <script>
     function escapeHtml(str) { return str ? str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") : ''; }
-
-    let uploadedImgA = '';
-    let uploadedImgB = '';
 
     const defaultMainMatch = {
       id: 'main',
@@ -169,189 +70,78 @@
       optionB: { name: '모하메드 살라', team: '리버풀 FC', img: '', votes: 2 }
     };
 
-    function renderMainMatchCard() {
+    function getTop3Matches() {
       const savedMain = localStorage.getItem('main_match_data');
       const mainData = savedMain ? JSON.parse(savedMain) : defaultMainMatch;
+      const customMatches = JSON.parse(localStorage.getItem('custom_matches') || '[]');
 
-      const imgA = mainData.optionA.img 
-        ? `<img src="${mainData.optionA.img}" class="w-full h-full object-cover">` 
-        : `<i class="fa-solid fa-user-ninja text-4xl text-blue-400/60 mb-2"></i>`;
+      const allMatches = [mainData, ...customMatches];
 
-      const imgB = mainData.optionB.img 
-        ? `<img src="${mainData.optionB.img}" class="w-full h-full object-cover">` 
-        : `<i class="fa-solid fa-user-ninja text-4xl text-red-400/60 mb-2"></i>`;
-
-      const html = `
-        <div onclick="location.href='detail.html?id=main'" class="reveal-card active group relative rounded-3xl overflow-hidden border border-red-500/40 bg-[#121722] hover:border-red-500 transition-all duration-300 cursor-pointer shadow-2xl flex flex-col justify-between">
-          <div class="p-6">
-            <div class="flex justify-between items-center mb-3">
-              <span class="text-xs font-black text-red-400 bg-red-950/90 border border-red-800 px-3 py-1 rounded-full">🔥 MAIN MATCH</span>
-              <span class="text-xs text-gray-400"><i class="fa-solid fa-fire text-red-500"></i> 프리미어리그</span>
-            </div>
-            <h2 class="text-xl md:text-2xl font-black italic tracking-wide group-hover:text-blue-400 transition">${escapeHtml(mainData.title)}</h2>
-          </div>
-
-          <div class="grid grid-cols-2 gap-3 p-4 bg-gray-950/50">
-            <div class="h-40 md:h-52 rounded-2xl border border-blue-900/40 bg-gradient-to-br from-blue-950/40 to-gray-900/80 flex flex-col items-center justify-center p-4 text-center overflow-hidden">
-              ${imgA}
-              <p class="text-base md:text-lg font-black text-white mt-1">${escapeHtml(mainData.optionA.name)}</p>
-              <span class="text-xs text-blue-400/80">${escapeHtml(mainData.optionA.team)}</span>
-            </div>
-            <div class="h-40 md:h-52 rounded-2xl border border-red-900/40 bg-gradient-to-br from-red-950/40 to-gray-900/80 flex flex-col items-center justify-center p-4 text-center overflow-hidden">
-              ${imgB}
-              <p class="text-base md:text-lg font-black text-white mt-1">${escapeHtml(mainData.optionB.name)}</p>
-              <span class="text-xs text-red-400/80">${escapeHtml(mainData.optionB.team)}</span>
-            </div>
-          </div>
-
-          <div class="p-5 border-t border-gray-800/80 flex justify-between items-center text-xs md:text-sm text-gray-400 bg-gray-900/60">
-            <span class="font-bold">${escapeHtml(mainData.optionA.name)} VS ${escapeHtml(mainData.optionB.name)}</span>
-            <span class="text-blue-400 font-black group-hover:translate-x-1.5 transition">투표 참여하기 →</span>
-          </div>
-        </div>
-      `;
-
-      document.getElementById('main-match-container').innerHTML = html;
-    }
-
-    function compressImage(file, callback) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const img = new Image();
-        img.onload = function() {
-          const canvas = document.createElement('canvas');
-          let width = img.width;
-          let height = img.height;
-          const maxDim = 600;
-
-          if (width > maxDim || height > maxDim) {
-            if (width > height) {
-              height = Math.round((height * maxDim) / width);
-              width = maxDim;
-            } else {
-              width = Math.round((width * maxDim) / height);
-              height = maxDim;
-            }
-          }
-
-          canvas.width = width;
-          canvas.height = height;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, width, height);
-
-          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.7);
-          callback(compressedDataUrl);
-        };
-        img.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-
-    function getCustomMatches() {
-      const saved = localStorage.getItem('custom_matches');
-      return saved ? JSON.parse(saved) : [];
-    }
-
-    function handleFileSelect(e, target) {
-      const file = e.target.files[0];
-      if (!file) return;
-
-      compressImage(file, (compressedBase64) => {
-        if (target === 'a') {
-          uploadedImgA = compressedBase64;
-          document.getElementById('preview-a').src = uploadedImgA;
-          document.getElementById('preview-a-container').classList.remove('hidden');
-        } else {
-          uploadedImgB = compressedBase64;
-          document.getElementById('preview-b').src = uploadedImgB;
-          document.getElementById('preview-b-container').classList.remove('hidden');
-        }
+      // 총 투표수 기준 내림차순 정렬 후 상위 3개 슬라이스
+      allMatches.sort((a, b) => {
+        const totalA = (a.optionA.votes || 0) + (a.optionB.votes || 0);
+        const totalB = (b.optionA.votes || 0) + (b.optionB.votes || 0);
+        return totalB - totalA;
       });
+
+      return allMatches.slice(0, 3);
     }
 
-    function openListModal() { 
-      renderModalMatches();
-      document.getElementById('list-modal').classList.remove('hidden'); 
-    }
-    function closeListModal() { document.getElementById('list-modal').classList.add('hidden'); }
+    function renderTop3() {
+      const top3 = getTop3Matches();
 
-    function openCreateModal() { document.getElementById('create-modal').classList.remove('hidden'); }
-    function closeCreateModal() { 
-      document.getElementById('create-modal').classList.add('hidden');
-      uploadedImgA = '';
-      uploadedImgB = '';
-      document.getElementById('preview-a-container').classList.add('hidden');
-      document.getElementById('preview-b-container').classList.add('hidden');
-    }
+      const html = top3.map((m, idx) => {
+        const rankBadges = [
+          '<span class="text-xs font-black text-amber-400 bg-amber-950/90 border border-amber-600 px-3 py-1 rounded-full">🥇 1위</span>',
+          '<span class="text-xs font-black text-gray-300 bg-gray-900/90 border border-gray-600 px-3 py-1 rounded-full">🥈 2위</span>',
+          '<span class="text-xs font-black text-amber-600 bg-amber-950/90 border border-amber-800 px-3 py-1 rounded-full">🥉 3위</span>'
+        ];
 
-    function handleCreateMatch(e) {
-      e.preventDefault();
-      const title = document.getElementById('modal-title').value.trim();
-      const aName = document.getElementById('modal-a-name').value.trim();
-      const aTeam = document.getElementById('modal-a-team').value.trim() || 'A팀';
-      const urlA = document.getElementById('modal-a-img').value.trim();
-      const aImg = uploadedImgA || urlA || '';
+        const imgA = m.optionA.img 
+          ? `<img src="${m.optionA.img}" class="w-full h-full object-cover">` 
+          : `<i class="fa-solid fa-user-ninja text-4xl text-blue-400/60 mb-2"></i>`;
 
-      const bName = document.getElementById('modal-b-name').value.trim();
-      const bTeam = document.getElementById('modal-b-team').value.trim() || 'B팀';
-      const urlB = document.getElementById('modal-b-img').value.trim();
-      const bImg = uploadedImgB || urlB || '';
+        const imgB = m.optionB.img 
+          ? `<img src="${m.optionB.img}" class="w-full h-full object-cover">` 
+          : `<i class="fa-solid fa-user-ninja text-4xl text-red-400/60 mb-2"></i>`;
 
-      const newMatch = {
-        id: `match_${Date.now()}`,
-        title,
-        optionA: { name: aName, team: aTeam, img: aImg, votes: 0 },
-        optionB: { name: bName, team: bTeam, img: bImg, votes: 0 }
-      };
+        const totalVotes = (m.optionA.votes || 0) + (m.optionB.votes || 0);
 
-      const list = getCustomMatches();
-      list.unshift(newMatch);
-      
-      try {
-        localStorage.setItem('custom_matches', JSON.stringify(list));
-      } catch (err) {
-        alert("저장 용량이 부족합니다.");
-        return;
-      }
-
-      closeCreateModal();
-      e.target.reset();
-      renderModalMatches();
-    }
-
-    function renderModalMatches() {
-      const container = document.getElementById('modal-match-list');
-      const list = getCustomMatches();
-
-      let html = `
-        <div onclick="location.href='detail.html?id=main'" class="bg-gray-900/90 border border-red-900/50 hover:border-red-500 rounded-2xl p-4 shadow-lg flex items-center justify-between cursor-pointer transition">
-          <div class="space-y-1">
-            <span class="text-[10px] font-black text-red-400 bg-red-950 px-2 py-0.5 rounded">MAIN</span>
-            <h4 class="text-sm font-black italic text-white">2020년대 최고의 프리미어리그 윙어는?</h4>
-            <p class="text-xs text-gray-400">손흥민 VS 모하메드 살라</p>
-          </div>
-          <span class="text-xs text-gray-300 font-bold">입장 →</span>
-        </div>
-      `;
-
-      if (list.length > 0) {
-        html += list.map(m => `
-          <div onclick="location.href='detail.html?id=${m.id}'" class="bg-gray-900/90 border border-gray-800 hover:border-blue-500/80 rounded-2xl p-4 shadow-lg flex items-center justify-between cursor-pointer transition">
-            <div class="space-y-1">
-              <h4 class="text-sm font-black italic text-white">${escapeHtml(m.title)}</h4>
-              <p class="text-xs text-gray-400">${escapeHtml(m.optionA.name)} VS ${escapeHtml(m.optionB.name)}</p>
+        return `
+          <div onclick="location.href='detail.html?id=${m.id}'" class="group relative rounded-3xl overflow-hidden border border-gray-800 hover:border-blue-500/80 bg-[#121722] transition duration-300 cursor-pointer shadow-2xl flex flex-col justify-between">
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-3">
+                ${rankBadges[idx]}
+                <span class="text-xs text-gray-400"><i class="fa-solid fa-fire text-red-500"></i> 총 ${totalVotes}표 참여</span>
+              </div>
+              <h2 class="text-xl md:text-2xl font-black italic tracking-wide group-hover:text-blue-400 transition">${escapeHtml(m.title)}</h2>
             </div>
-            <div class="flex items-center gap-3">
-              <span class="text-xs text-gray-300 font-bold">입장 →</span>
+
+            <div class="grid grid-cols-2 gap-3 p-4 bg-gray-950/50">
+              <div class="h-40 md:h-48 rounded-2xl border border-blue-900/40 bg-gradient-to-br from-blue-950/40 to-gray-900/80 flex flex-col items-center justify-center p-4 text-center overflow-hidden">
+                ${imgA}
+                <p class="text-base md:text-lg font-black text-white mt-1">${escapeHtml(m.optionA.name)}</p>
+                <span class="text-xs text-blue-400/80">${escapeHtml(m.optionA.team || '')}</span>
+              </div>
+              <div class="h-40 md:h-48 rounded-2xl border border-red-900/40 bg-gradient-to-br from-red-950/40 to-gray-900/80 flex flex-col items-center justify-center p-4 text-center overflow-hidden">
+                ${imgB}
+                <p class="text-base md:text-lg font-black text-white mt-1">${escapeHtml(m.optionB.name)}</p>
+                <span class="text-xs text-red-400/80">${escapeHtml(m.optionB.team || '')}</span>
+              </div>
+            </div>
+
+            <div class="p-5 border-t border-gray-800/80 flex justify-between items-center text-xs md:text-sm text-gray-400 bg-gray-900/60">
+              <span class="font-bold">${escapeHtml(m.optionA.name)} VS ${escapeHtml(m.optionB.name)}</span>
+              <span class="text-blue-400 font-black group-hover:translate-x-1.5 transition">투표 참여하기 →</span>
             </div>
           </div>
-        `).join('');
-      }
+        `;
+      }).join('');
 
-      container.innerHTML = html;
+      document.getElementById('top3-container').innerHTML = html;
     }
 
-    document.addEventListener('DOMContentLoaded', renderMainMatchCard);
+    document.addEventListener('DOMContentLoaded', renderTop3);
   </script>
 </body>
 </html>
